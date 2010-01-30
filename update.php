@@ -25,26 +25,8 @@ function my_exec($cmd) {
     }
 }
 
-function checkout() {
-    $dirs = array(
-        'apps/lang/.svn' => '/usr/bin/svn checkout svn://svn.rockbox.org/rockbox/trunk/apps/lang apps/lang',
-        'tools/.svn' => '/usr/bin/svn checkout svn://svn.rockbox.org/rockbox/trunk/tools',
-    );
-    foreach($dirs as $dir => $cmd) {
-        if (!file_exists($dir)) {
-            print("\$ $cmd\n");
-            list($retval, $stdout, $stderr) = my_exec($cmd);
-            if ($retval == 0) { print($stdout); }
-            else { printf("retval: %d\nSTDOUT:\n%s\nSTDERR:\n%s\n--------------------------------------------------\n", $retval, $stdout, $stderr); }
-        }
-        if (!file_exists($dir)) {
-            die(sprintf("Failed to checkout %s\n", $dir));
-        }
-    }
-    chmod('apps/lang', 0777);
-}
-
 function update_langs() {
+    chmod('apps/lang', 0777); // Make sure the web server can write temp files
     $cmds = <<<END
 /usr/bin/svn cleanup apps/lang
 /usr/bin/svn update  apps/lang
@@ -159,7 +141,6 @@ function update_flags() {
     }
 }
 
-checkout();
 update_langs();
 genstats();
 update_flags();
