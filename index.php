@@ -82,7 +82,6 @@ function show_stats() {
   
     echo <<<END
 <h1>Rockbox translations</h1>
-<p>Go <a href="../">back</a>.</p>
 
 <p>
 On this page you can see the current status of the various Rockbox translations.
