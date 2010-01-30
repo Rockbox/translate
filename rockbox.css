@@ -1,0 +1,93 @@
+BODY {
+ background-color: #729fcf;
+ color: black;
+/* margin: 0px; */
+ text-decoration:  none;
+ font-family:      sans-serif;
+ font-style:       normal;
+}
+
+H1 {
+ text-decoration:  none;
+ font-family:      sans-serif;
+ font-style:       normal;
+ font-weight:      bold;
+}
+
+TABLE {
+ border: outset thin #eeeeec;
+}
+
+INPUT, SELECT, OPTION, TEXTAREA {
+  background-color: #eeeeec;
+}
+
+TD
+{
+ background-color: #9ABDDE;
+ padding: 0.3em;
+}
+
+td img {
+    border: thin solid black;
+}
+
+img.icon {
+  border: none;
+}
+
+img.graph {
+    border: medium solid black;
+    margin: 1em 0;
+}
+
+div#gmap {
+    border: medium solid black;
+}
+
+li.user {
+    list-style-image: url(http://labs.google.com/ridefinder/images/mm_20_red.png)
+}
+li.dev {
+    list-style-image: url(http://labs.google.com/ridefinder/images/mm_20_blue.png)
+}
+
+strong {
+    font-weight: bold;
+    color: maroon;
+}
+
+p {
+    text-align:       justify;
+}
+
+thead {
+    font-weight: bold;
+}
+img.flagthumb {
+    border: 1px solid lightgray;
+}
+img.flag {
+    margin-left: 0.5em;
+    border: 2px solid lightgray;
+    float: right;
+    clear: right;
+}
+.note {
+    color: darkred;
+    font-weight: bold;
+}
+input.readonly {
+    background-color: lightgrey;
+    color: darkgrey;
+}
+h3 {
+    margin-bottom: 0;
+}
+
+tr.good td {
+    background-color: #aae8aa;
+}
+tr.poor td {
+    background-color: #DDAA9B;
+}
