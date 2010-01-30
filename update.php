@@ -2,6 +2,7 @@
 <?php
 error_reporting(E_ALL); 
 require_once('common.php');
+chdir(dirname(__FILE__));
 
 function my_exec($cmd) {
     $descriptorspec = array(
