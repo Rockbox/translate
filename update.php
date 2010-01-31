@@ -26,12 +26,12 @@ function my_exec($cmd) {
 }
 
 function update_langs() {
-    chmod('apps/lang', 0777); // Make sure the web server can write temp files
+    chmod('rockbox/apps/lang', 0777); // Make sure the web server can write temp files
     $cmds = <<<END
-/usr/bin/svn cleanup apps/lang
-/usr/bin/svn update  apps/lang
-/usr/bin/svn cleanup tools/
-/usr/bin/svn update  tools/genlang
+/usr/bin/svn cleanup rockbox/apps/lang
+/usr/bin/svn update  rockbox/apps/lang
+/usr/bin/svn cleanup rockbox/tools/
+/usr/bin/svn update  rockbox/tools/genlang
 END;
     foreach(explode("\n", $cmds) as $cmd) {
         print("$ ".$cmd."\n");
@@ -41,7 +41,7 @@ END;
     }
 
     $fp = fopen(VERSIONS, 'w');
-    foreach(glob('apps/lang/*.lang') as $lang) {
+    foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
         $xmlstr = shell_exec(sprintf("svn info --xml %s", $lang));
         list($retval, $xml, $stderr) = new SimpleXMLElement($xmlstr);
         $line = sprintf("%s:%d\n", basename($lang, '.lang'), $xml->entry->commit->attributes()->revision[0]);
@@ -60,26 +60,26 @@ function genstats() {
     
     $stats = array();
     foreach($langs as $lang => $rev) {
-        $cmd = sprintf("%s -s tools/genlang -u -e=apps/lang/english.lang apps/lang/%s.lang", PERL, $lang);
+        $cmd = sprintf("%s -s rockbox/tools/genlang -u -e=rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang", PERL, $lang);
         $output = shell_exec($cmd);
         print("$ $cmd\n");
         #printf("%s\n", $output);
-        file_put_contents(sprintf("apps/lang/%s.lang.update", $lang), $output);
+        file_put_contents(sprintf("rockbox/apps/lang/%s.lang.update", $lang), $output);
         list($lastrev, $lastupdate) = getlastupdated($lang);
-            $stat = array('name' => $lang, 'Total strings' => 0, 'Missing strings' => 0, 'Changed desc' => 0, 'Changed source' => 0, 'Last update' => $lastupdate, 'Last update rev' => $lastrev);
+            $stat = array('name' => $lang, 'total' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {
             switch(trim($line)) {
                 case '### This phrase below was not present in the translated file':
-                    $stat['Missing strings']++;
+                    $stat['missing']++;
                     break;
                 case '### The <source> section differs from the english!':
-                    $stat['Changed source']++;
+                    $stat['source']++;
                     break;
                 case '### The \'desc\' field differs from the english!':
-                    $stat['Changed desc']++;
+                    $stat['desc']++;
                     break;
                 case '<phrase>':
-                    $stat['Total strings']++;
+                    $stat['total']++;
             }
         }
         $stats[$lang] = $stat;
@@ -92,7 +92,7 @@ function getlastupdated($lang) {
     $retries = 0;
     while ($retries < 5) {
         try {
-            $xmlstr = shell_exec(sprintf("svn log --xml apps/lang/%s.lang", $lang));
+            $xmlstr = shell_exec(sprintf("svn log --xml rockbox/apps/lang/%s.lang", $lang));
             $xml = new SimpleXMLElement($xmlstr);
             $retries = 100;
         }

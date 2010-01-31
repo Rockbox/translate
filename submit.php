@@ -5,6 +5,7 @@ require_once('common.php');
 function submit() {
     header("Content-type: text/plain;charset=UTF-8");
     header(sprintf("Content-Disposition: attachment; filename=%s.diff", $_REQUEST['lang']));
+    chdir('rockbox'); // chdir into the rockbox dir to get proper diffs
 
     $i = 0;
     do {

@@ -9,11 +9,11 @@ if (isset($_REQUEST['upload']) && is_uploaded_file($_FILES['langfile']['tmp_name
 }
 else {
     $lang = isset($_GET['lang']) ? $_GET['lang'] : '';
-    $phrases = parselangfile(sprintf('apps/lang/%s.lang', $lang));
+    $phrases = parselangfile(sprintf('rockbox/apps/lang/%s.lang', $lang));
 }
 
 if ($phrases === false) die("This language doesn't exist, you bad man!");
-$english = parselangfile('apps/lang/english.lang');
+$english = parselangfile('rockbox/apps/lang/english.lang');
 
 if ($lang == 'english') {
 echo <<<MOO
