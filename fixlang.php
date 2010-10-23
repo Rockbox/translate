@@ -3,8 +3,6 @@ header("Content-type: text/plain; charset=UTF-8");
 require_once('common.php');
 mb_internal_encoding("UTF-8");
 
-chdir('rockbox');
-
 $langs = glob('apps/lang/*.lang');
 $langname = isset($_GET['lang']) ? $_GET['lang'] : 'HUGHAGHGULUAAUL';
 $cmds = explode(",", isset($_GET['cmd']) ? $_GET['cmd'] : '');
