@@ -9,11 +9,11 @@ if (isset($_REQUEST['upload']) && is_uploaded_file($_FILES['langfile']['tmp_name
 }
 else {
     $lang = isset($_GET['lang']) ? $_GET['lang'] : '';
-    $phrases = parselangfile(sprintf('rockbox/apps/lang/%s.lang', $lang));
+    $phrases = parselangfile(sprintf('apps/lang/%s.lang', $lang));
 }
 
 if ($phrases === false) die("This language doesn't exist, you bad man!");
-$english = parselangfile('rockbox/apps/lang/english.lang');
+$english = parselangfile('apps/lang/english.lang');
 
 if ($lang == 'english') {
 echo <<<MOO
@@ -92,7 +92,78 @@ if (sizeof($strings) > 0) {
 }
 
 $strings = array();
+$ignoreidentical = explode("\n",
+"LANG_SERIAL_BITRATE_19200
+LANG_SERIAL_BITRATE_9600
+LANG_SERIAL_BITRATE_38400
+LANG_SERIAL_BITRATE_57600
+LANG_COMPRESSOR_RATIO_10
+LANG_COMPRESSOR_RATIO_2
+LANG_COMPRESSOR_RATIO_6
+LANG_COMPRESSOR_RATIO_4
+LANG_ROCKBOX_TITLE
+LANG_EQUALIZER_BAND_Q
+LANG_COLOR_RGB_LABELS
+LANG_BYTE
+VOICE_ZERO
+VOICE_ONE
+VOICE_TWO
+VOICE_THREE
+VOICE_FOUR
+VOICE_FIVE
+VOICE_SIX
+VOICE_SEVEN
+VOICE_EIGHT
+VOICE_NINE
+VOICE_TEN
+VOICE_ELEVEN
+VOICE_TWELVE
+VOICE_THIRTEEN
+VOICE_FOURTEEN
+VOICE_FIFTEEN
+VOICE_SIXTEEN
+VOICE_SEVENTEEN
+VOICE_EIGHTEEN
+VOICE_NINETEEN
+VOICE_TWENTY
+VOICE_THIRTY
+VOICE_FORTY
+VOICE_FIFTY
+VOICE_SIXTY
+VOICE_SEVENTY
+VOICE_EIGHTY
+VOICE_NINETY
+VOICE_CHAR_A
+VOICE_CHAR_B
+VOICE_CHAR_C
+VOICE_CHAR_D
+VOICE_CHAR_E
+VOICE_CHAR_F
+VOICE_CHAR_G
+VOICE_CHAR_H
+VOICE_CHAR_I
+VOICE_CHAR_J
+VOICE_CHAR_K
+VOICE_CHAR_L
+VOICE_CHAR_M
+VOICE_CHAR_N
+VOICE_CHAR_O
+VOICE_CHAR_P
+VOICE_CHAR_Q
+VOICE_CHAR_R
+VOICE_CHAR_S
+VOICE_CHAR_T
+VOICE_CHAR_U
+VOICE_CHAR_V
+VOICE_CHAR_W
+VOICE_CHAR_X
+VOICE_CHAR_Y
+VOICE_CHAR_Z
+VOICE_PAUSE");
 foreach($phrases as $id => $phrase) {
+    if (in_array($id, $ignoreidentical)) {
+        continue;
+    }
     foreach($phrase['source'] as $target => $value) {
         if ($phrase['source'][$target] == $phrase['dest'][$target]
             && $phrase['source'][$target] != 'none'
@@ -137,6 +208,9 @@ if (sizeof($strings) > 0) {
 
 $strings = array();
 foreach($phrases as $id => $phrase) {
+    if (in_array($id, $ignoreidentical)) {
+        continue;
+    }
     foreach($phrase['source'] as $target => $value) {
         if ($phrase['voice'][$target] == $value && $value != '' && $value != 'none') {
             $strings[] = sprintf("<strong>%s:%s</strong>: Voice and source are the same (\"%s\")<br />\n",
