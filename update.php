@@ -32,6 +32,7 @@ function update_langs() {
 /usr/bin/svn update  rockbox/apps/lang
 /usr/bin/svn cleanup rockbox/tools/
 /usr/bin/svn update  rockbox/tools/genlang
+/usr/bin/svn update  rockbox/fonts
 END;
     foreach(explode("\n", $cmds) as $cmd) {
         print("$ ".$cmd."\n");
