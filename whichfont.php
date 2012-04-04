@@ -61,10 +61,12 @@ $fontstats = parse_ini_file('fontcoverage.ini', true);
 $langs = languageinfo();
 
 /* Output the first row - font names */
-foreach($fontstats['english'] as $font => $coverage) {
-    printf("    <td>%s</td>\n", getverticalimg($font));
+if (isset($fontstats['english'])) {
+    foreach($fontstats['english'] as $font => $coverage) {
+        printf("    <td>%s</td>\n", getverticalimg($font));
+    }
+    print("  </tr>\n  </thead>\n  <tbody>\n");
 }
-print("  </tr>\n  </thead>\n  <tbody>\n");
 
 foreach($fontstats as $lang => $stats) {
     printf("  <tr>\n    <td class='lang'><img src='flags/%d/%s.png' /> %s</td>\n",SMALL_FLAGSIZE, urlencode($langs[$lang]['flag']), $langs[$lang]['name']);

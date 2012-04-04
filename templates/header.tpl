@@ -2,6 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Rockbox Translations{if isset($title)} - {$title}{/if}</title>
 <link rel="stylesheet" href="rockbox.css" />
 </head>

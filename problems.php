@@ -13,7 +13,7 @@ else {
 }
 
 if ($phrases === false) die("This language doesn't exist, you bad man!");
-$english = parselangfile('apps/lang/english.lang');
+$english = parselangfile('rockbox/apps/lang/english.lang');
 
 if ($lang == 'english') {
 echo <<<MOO
@@ -237,6 +237,9 @@ if (sizeof($strings) > 0) {
     print(join($strings, ''));    
 }
 
+print("<!--\n");
+print_r($english);
+print("\n-->\n");
 
 $strings = array();
 foreach($phrases as $id => $phrase) {

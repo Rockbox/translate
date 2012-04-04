@@ -1,15 +1,17 @@
 #!/usr/bin/env python2.6
 import re
+import sys
+import locale
 import codecs
 from glob import glob
-from os.path import basename
+from os.path import basename, dirname, join
 from pprint import pprint
 
 def langs():
-    return glob('rockbox/apps/lang/*.lang')
+    return glob(join(dirname(__file__), 'rockbox/apps/lang/*.lang'))
 
 def fonts():
-    return glob('rockbox/fonts/*.bdf')
+    return glob(join(dirname(__file__), 'rockbox/fonts/*.bdf'))
 
 def charusage(langfile):
     usage = {}
@@ -50,11 +52,33 @@ def calculatecoverage(charsused, charsavailable):
             covered += uses
     return float(covered)/float(total)
 
-fontstats = dict([(font, charsavailable(font)) for font in fonts()])
-langusage = dict([(lang, charusage(lang)) for lang in langs()])
+def generate_summary(fontstats, langusage):
+    for langfile, charsused in sorted(langusage.items()):
+        print "[%s]" % basename(langfile).replace('.lang', '')
+        for fontfile, charsavailable in sorted(fontstats.items()):
+            coverage = calculatecoverage(charsused, charsavailable)
+            print "  %s = %f" % (basename(fontfile).replace('.bdf', ''), coverage)
 
-for langfile, charsused in sorted(langusage.items()):
-    print "[%s]" % basename(langfile).replace('.lang', '')
-    for fontfile, charsavailable in sorted(fontstats.items()):
-        coverage = calculatecoverage(charsused, charsavailable)
-        print "  %s = %f" % (basename(fontfile).replace('.bdf', ''), coverage)
+def generate_missing(fontstats, langusage):
+    for langfile, charsused in sorted(langusage.items()):
+        print "[%s]" % basename(langfile).replace('.lang', '')
+        for fontfile, charsavailable in sorted(fontstats.items()):
+            missingchars = []
+            for char, uses in charsused.iteritems():
+                if char not in charsavailable:
+                    missingchars.append(char)
+            # If more than 50 characters are missing, don't print them all
+            if 25 > len(missingchars) > 0:
+                print "  %s = %s" % (basename(fontfile).replace('.bdf', ''), " ".join(["%s (u+%X)" % (c, ord(c)) for c in missingchars]))
+
+
+if __name__ == '__main__':
+    sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout);
+
+    fontstats = dict([(font, charsavailable(font)) for font in fonts()])
+    langusage = dict([(lang, charusage(lang)) for lang in langs()])
+
+    if len(sys.argv) > 1 and sys.argv[1] == 'missing':
+        generate_missing(fontstats, langusage)
+    else:
+        generate_summary(fontstats, langusage)
