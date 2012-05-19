@@ -40,7 +40,7 @@ END;
 
     $fp = fopen(VERSIONS, 'w');
     foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
-        $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%h -1 %s",
+        $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H -1 %s",
                 "apps/lang/" . basename($lang)));
         $line = sprintf("%s:%s\n", basename($lang, '.lang'), trim($gitstr));
         fwrite($fp, $line);
@@ -90,7 +90,7 @@ function getlastupdated($lang) {
     $retries = 0;
     while ($retries < 5) {
         try {
-            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%h,%%at -50 apps/lang/%s.lang", $lang));
+            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H,%%at -50 apps/lang/%s.lang", $lang));
             $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
             $retries = 100;
         }
