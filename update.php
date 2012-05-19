@@ -100,18 +100,14 @@ function getlastupdated($lang) {
             if ($retries > 5) die("Cannot succeed :(");
         }
     }
-    // FIXME: ignorerevs.list / ignorehash.list doesn't work correctly right now.
-    list($rev, $date) = explode(",", trim($gitstr));
-    return array($rev, $date);
-    //$ignorehash = explode("\n", file_get_contents('ignoredhash.list'));
-    //foreach(explode('\n', $gitstr) as $logentry) {
-    //    list($rev, $date) = explode(",", trim($gitstr));
-    //    if(!in_array($rev, $ignorehash)) {
-    //        echo("aaa");
-    //        return array($rev, $date);
-    //    }
-    //}
-    //return array(0, 0);
+    $ignorehash = explode("\n", file_get_contents('ignoredhash.list'));
+    foreach(preg_split('(\n\r|\r\n|\r|\n)', $gitstr) as $logentry) {
+        list($rev, $date) = explode(",", trim($logentry));
+        if(!in_array($rev, $ignorehash)) {
+            return array($rev, $date);
+        }
+    }
+    return array(0, 0);
 }
 
 function update_flags() {
