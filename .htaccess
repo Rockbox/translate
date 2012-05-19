@@ -1,0 +1,6 @@
+<Files missingchars.ini>
+  ForceType 'text/plain; charset=UTF-8'
+</Files>
+<Files update.php>
+  Deny from all
+</Files>
