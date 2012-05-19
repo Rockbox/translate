@@ -3,7 +3,7 @@ header("Content-type: text/plain; charset=UTF-8");
 require_once('common.php');
 mb_internal_encoding("UTF-8");
 
-$langs = glob('apps/lang/*.lang');
+$langs = glob('rockbox/apps/lang/*.lang');
 $langname = isset($_GET['lang']) ? $_GET['lang'] : 'HUGHAGHGULUAAUL';
 $cmds = explode(",", isset($_GET['cmd']) ? $_GET['cmd'] : '');
 foreach(array('voice', 'sort', 'empty') as $cmd) {
@@ -17,10 +17,10 @@ array_walk($langs, 'my_basename');
 if (in_array($langname, $langs)) {
     if (isset($_GET['sendfile']))
         header(sprintf("Content-Disposition: attachment; filename=%s-fix-%s.diff", $langname, str_replace('/', '_', implode(',', $cmds))));
-    $langfile = sprintf("apps/lang/%s.lang", $langname);
-    $tempname = sprintf('apps/lang/%s.lang-fixlang-%s', $langname, uniqid('',$_SERVER['REMOTE_ADDR'].$langname));
+    $langfile = sprintf("rockbox/apps/lang/%s.lang", $langname);
+    $tempname = sprintf('rockbox/apps/lang/%s.lang-fixlang-%s', $langname, uniqid('',$_SERVER['REMOTE_ADDR'].$langname));
     $lang = parselangfile($langfile);
-    $english = parselangfile("apps/lang/english.lang");
+    $english = parselangfile("rockbox/apps/lang/english.lang");
     
     // Copy voice over if English source and voice are the same
     if (in_array('voice', $cmds)) {
@@ -52,7 +52,7 @@ if (in_array($langname, $langs)) {
         function langsort($a, $b) {
             static $english_ids = true;
             if ($english_ids === true) {
-                $english_ids = array_keys(parselangfile("apps/lang/english.lang"));
+                $english_ids = array_keys(parselangfile("rockbox/apps/lang/english.lang"));
             }
             if ($a === $b) return 0;
             return (array_search($a, $english_ids) < array_search($b, $english_ids) ? -1 : 1);        
@@ -91,7 +91,7 @@ MOO;
             case 'sort':  print(" * Sorting phrases in the order found in english.lang\n"); break;
         }
     }
-    print(shell_exec(sprintf("/usr/bin/diff -u apps/lang/%s.lang %s", $langname, $tempname)));
+    print(shell_exec(sprintf("/usr/bin/diff -u rockbox/apps/lang/%s.lang %s", $langname, $tempname)));
     unlink($tempname);
 }
 
