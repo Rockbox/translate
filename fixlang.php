@@ -75,7 +75,7 @@ if (in_array($langname, $langs)) {
 echo <<<MOO
 Copyright by individual Rockbox contributors
 See
-http://svn.rockbox.org/viewvc.cgi/trunk/apps/lang/$langname.lang?view=log
+http://git.rockbox.org/?p=rockbox.git;a=history;f=apps/lang/$langname.lang;hb=HEAD
 for details.
 May be distributed under the terms of the GNU GPL version 2 or later
 

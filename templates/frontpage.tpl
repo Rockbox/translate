@@ -63,7 +63,7 @@ possibly slightly safer way.
         {/if}
         </td>
         <td>
-            <a href='http://svn.rockbox.org/viewvc.cgi?view=rev&revision={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
+            <a href='http://git.rockbox.org/?p=rockbox.git;a=commit;h={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
                 {$language.last_update|simple_timesince}
             </a>
         </td>

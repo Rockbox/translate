@@ -28,11 +28,8 @@ function my_exec($cmd) {
 function update_langs() {
     chmod('rockbox/apps/lang', 0777); // Make sure the web server can write temp files
     $cmds = <<<END
-/usr/bin/svn cleanup rockbox/apps/lang
-/usr/bin/svn update  rockbox/apps/lang
-/usr/bin/svn cleanup rockbox/tools/
-/usr/bin/svn update  rockbox/tools/genlang
-/usr/bin/svn update  rockbox/fonts
+cd rockbox && /usr/bin/git checkout -f
+cd rockbox && /usr/bin/git pull
 END;
     foreach(explode("\n", $cmds) as $cmd) {
         print("$ ".$cmd."\n");
@@ -43,9 +40,8 @@ END;
 
     $fp = fopen(VERSIONS, 'w');
     foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
-        $xmlstr = shell_exec(sprintf("svn info --xml %s", $lang));
-        list($retval, $xml, $stderr) = new SimpleXMLElement($xmlstr);
-        $line = sprintf("%s:%d\n", basename($lang, '.lang'), $xml->entry->commit->attributes()->revision[0]);
+        $gitstr = shell_exec(sprintf("git log --pretty=%%h -1 %s", $lang));
+        $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
         fwrite($fp, $line);
     }
     fclose($fp);
@@ -93,8 +89,8 @@ function getlastupdated($lang) {
     $retries = 0;
     while ($retries < 5) {
         try {
-            $xmlstr = shell_exec(sprintf("svn log --xml rockbox/apps/lang/%s.lang", $lang));
-            $xml = new SimpleXMLElement($xmlstr);
+            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%h,%%at -50 apps/lang/%s.lang", $lang));
+            $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
             $retries = 100;
         }
         catch (Exception $e) {
@@ -103,21 +99,18 @@ function getlastupdated($lang) {
             if ($retries > 5) die("Cannot succeed :(");
         }
     }
-    $ignorerevs = explode("\n", file_get_contents('ignoredrevs.list'));
-    foreach($xml->logentry as $logentry) {
-        $rev = (string) $logentry['revision'];
-        preg_match('@([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})\.[0-9]*(.*)@', $logentry->date, $matches);
-        $date = mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
-        switch($matches[7]) {
-            case 'Z':
-                $date += date("Z", $date);
-                break;
-        }
-        if (!in_array($rev, $ignorerevs)) {
-            return array($rev, $date);
-        }
-    }
-    return array(0, 0);
+    // FIXME: ignorerevs.list / ignorehash.list doesn't work correctly right now.
+    list($rev, $date) = explode(",", trim($gitstr));
+    return array($rev, $date);
+    //$ignorehash = explode("\n", file_get_contents('ignoredhash.list'));
+    //foreach(explode('\n', $gitstr) as $logentry) {
+    //    list($rev, $date) = explode(",", trim($gitstr));
+    //    if(!in_array($rev, $ignorehash)) {
+    //        echo("aaa");
+    //        return array($rev, $date);
+    //    }
+    //}
+    //return array(0, 0);
 }
 
 function update_flags() {
