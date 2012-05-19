@@ -40,8 +40,9 @@ END;
 
     $fp = fopen(VERSIONS, 'w');
     foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
-        $gitstr = shell_exec(sprintf("git log --pretty=%%h -1 %s", $lang));
-        $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
+        $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%h -1 %s",
+                "apps/lang/" . basename($lang)));
+        $line = sprintf("%s:%s\n", basename($lang, '.lang'), trim($gitstr));
         fwrite($fp, $line);
     }
     fclose($fp);
