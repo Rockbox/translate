@@ -2,6 +2,8 @@
 require_once('common.php');
 print_head();
 
+$languageinfo = languageinfo();
+
 if (isset($_REQUEST['upload']) && is_uploaded_file($_FILES['langfile']['tmp_name'])) {
     $lang = 'upload';
     $phrases = parselangfile($_FILES['langfile']['tmp_name']);
