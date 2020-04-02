@@ -1,9 +1,6 @@
-<Files missingchars.ini>
+<Files "*.ini">
   ForceType 'text/plain; charset=UTF-8'
 </Files>
-<Files update.php>
-  Deny from all
-</Files>
-<Files rockbox>
-  Deny from all
+<Files "update.php">
+  Require all denied
 </Files>
