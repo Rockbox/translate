@@ -4,3 +4,6 @@
 <Files update.php>
   Deny from all
 </Files>
+<Files rockbox>
+  Deny from all
+</Files>
