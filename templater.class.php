@@ -31,20 +31,19 @@ class templater {
         /* Load and set up Smarty */
         require_once(sprintf("%s/Smarty.class.php", $smartydir));
         $s = new smarty();
-        $s->template_dir = "templates";
-        $s->compile_dir = "templates/compiled";
-        $s->cache_dir = "templates/cache";
-        $s->caching = false;
-        $s->debugging = false;
-        $s->security = true;
-        $s->security_settings['IF_FUNCS'] = array('array_key_exists', 'isset', 'is_array', 'count', 'file_exists');
-        $s->secure_dir = array(
-            realpath($s->template_dir)
-        );
+        $s->setTemplateDir("templates");
+        $s->setCompileDir("templates/compiled");
+        $s->setCacheDir("templates/cache");
+//        $s->caching = false;
+//        $s->debugging = false;
+//        $s->security = true;
+//        $s->security_settings['IF_FUNCS'] = array('array_key_exists', 'isset', 'is_array', 'count', 'file_exists');
+//        $s->secure_dir = realpath($s->template_dir);
+//        $s->register_modifier('simple_timesince', array(&$this, 'simple_timesince'));
+	$s->registerPlugin("modifier","simple_timesince", array(&$this, "simple_timesince"));
         $this->s = $s;
-        $s->register_modifier('simple_timesince', array(&$this, 'simple_timesince'));
     }
-    
+
     public function simple_timesince($timestamp) {
         $seconds = time() - $timestamp;
         $one_hour = 60*60;

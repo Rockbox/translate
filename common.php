@@ -4,9 +4,10 @@ define("STATS", 'stats.dat');
 define("VERSIONS", 'versions.dat');
 define("SMALL_FLAGSIZE", '22');
 define("LARGE_FLAGSIZE", '150');
+define("SMARTY_PATH", '/usr/share/php/Smarty');
 
 require_once('templater.class.php');
-$smarty = new templater('/usr/share/php/smarty/libs');
+$smarty = new templater(SMARTY_PATH);
 $smarty->assign('languages', languageinfo());
 $smarty->assign('updated', file_exists(STATS) ? filemtime(STATS) : 0);
 
