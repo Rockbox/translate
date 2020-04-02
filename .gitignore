@@ -1,7 +1,9 @@
 
-rockbox/
+rockbox
 templates/compiled
+headers
 
 stats.dat
 versions.dat
 fontcoverage.ini
+missingchars.ini
