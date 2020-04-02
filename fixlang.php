@@ -1,4 +1,22 @@
 <?php
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
 header("Content-type: text/plain; charset=UTF-8");
 require_once('common.php');
 mb_internal_encoding("UTF-8");
@@ -21,7 +39,7 @@ if (in_array($langname, $langs)) {
     $tempname = sprintf('rockbox/apps/lang/%s.lang-fixlang-%s', $langname, uniqid('',$_SERVER['REMOTE_ADDR'].$langname));
     $lang = parselangfile($langfile);
     $english = parselangfile("rockbox/apps/lang/english.lang");
-    
+
     // Copy voice over if English source and voice are the same
     if (in_array('voice', $cmds)) {
         foreach($lang as $id => $phrase) {
@@ -30,7 +48,7 @@ if (in_array($langname, $langs)) {
             }
         }
     }
-    
+
     // Mirror empty/none strings from English to target
     if (in_array('empty', $cmds)) {
         foreach($lang as $id => $phrase) {
@@ -46,7 +64,7 @@ if (in_array($langname, $langs)) {
             }
         }
     }
-    
+
     // Sort language in English order
     if (in_array('sort', $cmds)) {
         function langsort($a, $b) {
@@ -55,11 +73,11 @@ if (in_array($langname, $langs)) {
                 $english_ids = array_keys(parselangfile("rockbox/apps/lang/english.lang"));
             }
             if ($a === $b) return 0;
-            return (array_search($a, $english_ids) < array_search($b, $english_ids) ? -1 : 1);        
+            return (array_search($a, $english_ids) < array_search($b, $english_ids) ? -1 : 1);
         }
         uksort($lang, 'langsort');
     }
-    
+
     $fp = fopen($tempname, 'w');
     // Print header
     foreach(file($langfile) as $line) {

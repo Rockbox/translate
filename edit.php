@@ -1,5 +1,24 @@
 <?php
-error_reporting(E_ALL); 
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
+
+error_reporting(E_ALL);
 require_once('common.php');
 
 function edit($lang) {
@@ -43,7 +62,7 @@ END;
                 printf("Description: %s<br />\n", $phrase['phrase']['desc']);
             if (isset($phrase['phrase']['user']) && $phrase['phrase']['user'] != '')
                 printf("User: %s<br />\n", $phrase['phrase']['user']);
-            
+
             if (sizeof($phrase['notes']) > 0) {
                 print("<div class='note'>");
                 foreach($phrase['notes'] as $line) {
@@ -51,7 +70,7 @@ END;
                 }
                 print("</div>");
             }
-            
+
             printf("<table><thead><tr><td>Target/feature</td><td>English string</td><td>%s translation</td><td>English voice</td><td>%s voice</td></tr></thead>", $languageinfo[$lang]['name'], $languageinfo[$lang]['name']);
             foreach($phrase['source'] as $target => $string) {
                 // Figure out what to put in the translated string
@@ -60,11 +79,11 @@ END;
                 }
                 elseif (isset($phrase['dest'][$target]) && $phrase['dest'][$target] != '' && $phrase['dest'][$target] != 'none') {
                     $translated_value = $phrase['dest'][$target];
-                } 
+                }
                 else {
                     $translated_value = '';
                 }
-                
+
                 // Figure out whether to set the translated value readonly
                 if (
                     // If english string is either unset, '' or none
@@ -78,7 +97,7 @@ END;
                 else {
                     $translated_readonly = '';
                 }
-                
+
                 // Figure out what to put in the voice string
                 if (isset($english[$id]['voice'][$target]) && ($english[$id]['voice'][$target] == '' || $english[$id]['voice'][$target] == 'none')) {
                     $voice_value = $phrase['voice'][$target] = $english[$id]['voice'][$target];
@@ -89,7 +108,7 @@ END;
                 else {
                     $voice_value = '';
                 }
-                
+
                 // Figure out whether to set the voice value readonly
                 if (
                     // If english voice is either unset, '' or none
@@ -103,7 +122,7 @@ END;
                 else {
                     $voice_readonly = '';
                 }
-                
+
                 print("<tr>");
                 printf("<td>%s</td><td>%s</td><td><input %s %s name='phrases[%s][dest][%s]' size='40' type='text' value='%s' %s /></td>",
                     htmlspecialchars($target),
@@ -115,7 +134,7 @@ END;
                     htmlspecialchars($translated_value, ENT_QUOTES),
                     $translated_readonly
                 );
-                
+
                 if (!isset($english[$id]['voice'][$target])) {
                     print("<td colspan='2'></td>");
                 }
@@ -149,7 +168,7 @@ When you click this button, you will be sent a Rockbox language file. If you are
 satisfied with your changes, you're<!-- ' --> encouraged to submit this file in
 the <a href="http://www.rockbox.org/tracker/newtask/proj1">Rockbox patch
 tracker.</a>
-</p> 
+</p>
 END;
 }
 

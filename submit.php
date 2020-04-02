@@ -1,5 +1,24 @@
 <?php
-error_reporting(E_ALL); 
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
+
+error_reporting(E_ALL);
 require_once('common.php');
 
 function submit() {
@@ -21,14 +40,14 @@ function submit() {
     } while (file_exists($filename));
 
     $fp = fopen($filename, 'w');
-    
+
     // Write a header if one exists
     $original_lines = file(sprintf("apps/lang/%s.lang", $_REQUEST['lang']));
     foreach($original_lines as $i => $line) {
         if (substr($line, 0, 1) == "<") { break; }
         fwrite($fp, $line);
     }
-    
+
     $original = parselangfile(sprintf("apps/lang/%s.lang.update", $_REQUEST['lang']));
     $english = parselangfile("apps/lang/english.lang");
     print("Copyright by individual Rockbox contributors\n");

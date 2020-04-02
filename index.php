@@ -1,5 +1,23 @@
 <?php
-error_reporting(E_ALL); 
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
+error_reporting(E_ALL);
 require_once('common.php');
 
     function langsort($a, $b) {
@@ -11,8 +29,8 @@ require_once('common.php');
         $bp = $b['last_update_rev'];
         // Sort by status
         $ap = $a['percentage'];
-        $bp = $b['percentage']; 
-        
+        $bp = $b['percentage'];
+
         $ac = $a['desc'] + $a['source'];
         $bc = $b['desc'] + $b['source'];
         if ($ap == $bp) {
@@ -23,7 +41,7 @@ require_once('common.php');
                 return $a['name'] > $b['name'] ? -1 : 1;
             }
         }
-        return $ap < $bp ? 1 : -1; 
+        return $ap < $bp ? 1 : -1;
     }
 
 function get_stats() {
@@ -48,7 +66,7 @@ function get_stats() {
 
         /* Count this language into the summary */
         switch(true) {
-            case $info['percentage'] == 100 
+            case $info['percentage'] == 100
                    && $info['source'] == 0
                    && $info['desc'] == 0:
                 $stats['summary']['complete']++;
@@ -58,7 +76,7 @@ function get_stats() {
                 break;
             case $info['percentage'] > 50;
                 $stats['summary']['normal']++;
-                break;                
+                break;
             default:
                 $stats['summary']['bad']++;
                 break;
@@ -67,7 +85,7 @@ function get_stats() {
     uasort($stats['langstats'], 'langsort');
     return $stats;
 }
-    
+
 
 $stats = get_stats();
 $smarty->render('frontpage.tpl', $stats);

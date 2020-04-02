@@ -1,4 +1,23 @@
 <?php
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
+
 define("PERL", '/usr/bin/perl');
 define("STATS", 'stats.dat');
 define("VERSIONS", 'versions.dat');
@@ -28,12 +47,12 @@ function parselangfile($filename) {
         'notes' => array(),
     );
     $thisphrase = $empty;
-    
+
     $pos = 'phrase';
-    
+
     foreach($lines as $lineno => $line) {
         $line = trim($line);
-        
+
         if (preg_match("/^### (.*)$/", $line, $matches)) {
             if (strpos($matches[1], "The phrase is not used. Skipped") === false) {
                 $thisphrase['notes'][] = $matches[1];
@@ -61,7 +80,7 @@ function parselangfile($filename) {
             case '<voice>': $pos = 'voice'; break;
         }
     }
-    return $phrases;    
+    return $phrases;
 }
 
 function printphrase($phrase) {
@@ -71,7 +90,7 @@ function printphrase($phrase) {
         isset($phrase['phrase']['desc']) && $phrase['phrase']['desc'] != "" ? ' '.$phrase['phrase']['desc'] : '',
         isset($phrase['phrase']['user']) && $phrase['phrase']['user'] != "" ? ' '.$phrase['phrase']['user'] : ''
     );
-    
+
     foreach(array('source', 'dest', 'voice') as $field) {
         $ret .= sprintf("  <%s>\n", $field);
         if (isset($phrase[$field])) {

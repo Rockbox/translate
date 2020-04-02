@@ -1,4 +1,23 @@
 <?php
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
+
 header("Content-type: text/html; charset=UTF-8");
 require_once('common.php');
 /* Set internal character encoding to UTF-8 */
@@ -79,7 +98,7 @@ foreach($fontstats as $lang => $stats) {
             $g = 0xBD * (1-$coverage);
             $b = 0xDE * (1-$coverage);
             printf("    <td style='background-color: #%02X%02X%02X' title='%s has %0.2f%% coverage of %s'>&nbsp;</td>", $r, $g, $b, $font, $coverage*100, $lang);
-        } 
+        }
     }
     print("  </tr>\n");
 }

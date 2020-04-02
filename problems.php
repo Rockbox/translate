@@ -1,4 +1,23 @@
 <?php
+/************************************************************************
+ *             __________               __   ___.
+ *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
+ *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
+ *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
+ *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
+ *                     \/            \/     \/    \/            \/
+ * Copyright (C) 2010 Jonas Häggqvist
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+ * KIND, either express or implied.
+ *
+ **************************************************************************/
+
 require_once('common.php');
 print_head();
 
@@ -65,7 +84,7 @@ foreach($english as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Missing strings/targets</h2>\n");
     print("<p>This is an error that should be fixed</p>\n");
-    print(join($strings, ''));    
+    print(join($strings, ''));
 }
 
 $strings = array();
@@ -182,14 +201,14 @@ foreach($phrases as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Identical English and translation</h2>");
     printf("<p>Doesn't have to be a problem, if the string is valid in the %s language</p>\n", $languageinfo[$lang]['name']);
-    print(join($strings, ''));    
+    print(join($strings, ''));
 }
 
 
 $strings = array();
 foreach($english as $id => $phrase) {
     foreach($phrase['source'] as $target => $value) {
-        if (($phrases[$id]['voice'][$target] == '' 
+        if (($phrases[$id]['voice'][$target] == ''
                 || $phrases[$id]['voice'][$target] == 'none')
                 && $phrase['voice'][$target] != ''
                 && $phrase['voice'][$target] != 'none'
@@ -205,7 +224,7 @@ foreach($english as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Missing voice strings</h2>");
     printf("<p>This is almost certainly a mistake unless the string does not make sense in the %s language, and should be fixed before it's possible to generate meaningful voicefiles for the %s language.</p>\n", $languageinfo[$lang]['name'], $languageinfo[$lang]['name']);
-    print(join($strings, ''));    
+    print(join($strings, ''));
 }
 
 $strings = array();
@@ -236,7 +255,7 @@ foreach($phrases as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Same voice and source</h2>");
     printf("<p>Doesn't have to be a problem, if the string is valid in the %s language</p>\n", $languageinfo[$lang]['name']);
-    print(join($strings, ''));    
+    print(join($strings, ''));
 }
 
 print("<!--\n");
