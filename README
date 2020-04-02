@@ -1,0 +1,14 @@
+Requirements:
+
+php-Smarty >= 3.0
+
+perl (to update the language files)
+
+To set up:
+
+ mkdir -p templates/compiled
+ chown apaache:apache templates/compliled
+
+ git clone git://git.rockbox.org/rockbox rockbox
+
+Then set up a cron job or something else that invokes 'php update.php'
