@@ -11,4 +11,7 @@ To set up:
 
  git clone git://git.rockbox.org/rockbox rockbox
 
-Then set up a cron job or something else that invokes 'php update.php'
+Then set up cron job (or some sort of hook) for:
+
+ php update.php
+ fontstats.py > fontcoverage.ini
