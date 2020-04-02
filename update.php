@@ -1,6 +1,6 @@
-#!/usr/bin/php5 -q
+#!/usr/bin/php -q
 <?php
-error_reporting(E_ALL); 
+error_reporting(E_ALL);
 require_once('common.php');
 chdir(dirname(__FILE__));
 
@@ -14,8 +14,8 @@ function my_exec($cmd) {
     if (is_resource($p)) {
         $stdout = stream_get_contents($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
-        fclose($pipes[0]);        
-        fclose($pipes[1]);        
+        fclose($pipes[0]);
+        fclose($pipes[1]);
         fclose($pipes[2]);
         $retval = proc_close($p);
         return array($retval, $stdout, $stderr);
@@ -52,10 +52,10 @@ END;
 function genstats() {
     $langs = array();
     foreach(file(VERSIONS) as $line) {
-        list($lang, $version) = explode(":", trim($line)); 
+        list($lang, $version) = explode(":", trim($line));
         $langs[$lang] = $version;
     }
-    
+
     $stats = array();
     foreach($langs as $lang => $rev) {
         $cmd = sprintf("%s -s rockbox/tools/genlang -u -e=rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang", PERL, $lang);
@@ -112,6 +112,7 @@ function getlastupdated($lang) {
 
 function update_flags() {
     $languageinfo = languageinfo();
+    $path = "e/e6";
 
     if (!file_exists('flags')) {
         mkdir('flags');
@@ -123,10 +124,10 @@ function update_flags() {
         foreach($languageinfo as $lang) {
             $dest = sprintf("flags/%d/%s.png", $size, $lang['flag']);
             if (!file_exists($dest)) {
-                $src = sprintf('http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_%2$s.svg/%1$dpx-Flag_of_%2$s.svg.png', $size, $lang['flag']);
+                $src = sprintf('http://upload.wikimedia.org/wikipedia/commons/thumb/%3$s/Flag_of_%2$s.svg/%1$dpx-Flag_of_%2$s.svg.png', $size, $lang['flag'], $path);
                 printf("%s \n --> %s\n", $src, $dest);
                 copy($src, $dest);
-                sleep(1.5); # Don't be rude
+                sleep(1.0); # Don't be rude
             }
         }
     }
