@@ -45,6 +45,9 @@ function my_exec($cmd) {
 
 function update_langs() {
     chmod('rockbox/apps/lang', 0777); // Make sure the web server can write temp files
+
+/*
+    // This is no longer needed as we have a cron job doing the git repo update
     $cmds = <<<END
 cd rockbox && /usr/bin/git checkout -f
 cd rockbox && /usr/bin/git pull
@@ -55,7 +58,7 @@ END;
         if ($retval == 0) { print($stdout); }
         else { printf("retval: %d\nSTDOUT:\n%s\nSTDERR:\n%s\n--------------------------------------------------\n", $retval, $stdout, $stderr); }
     }
-
+*/
     $fp = fopen(VERSIONS, 'w');
     foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
         $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H -1 %s",
@@ -108,7 +111,7 @@ function getlastupdated($lang) {
     $retries = 0;
     while ($retries < 5) {
         try {
-            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H,%%at -50 apps/lang/%s.lang", $lang));
+            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H,%%ct -50 apps/lang/%s.lang", $lang));
             $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
             $retries = 100;
         }
