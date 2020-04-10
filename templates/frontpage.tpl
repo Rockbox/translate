@@ -48,7 +48,9 @@ possibly slightly safer way.
             <img class="flagthumb" src="flags/22/{$language.flag}.png" />
         </td>
         <td>
+	{if $langfile != 'english'}
             <a href='problems.php?lang={$langfile}'><img style='border: none' src='warning.gif' width='16' height='16' /></a>
+        {/if}
         </td>
         <td>
         {if file_exists('graphs/$langfile')}

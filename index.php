@@ -21,12 +21,18 @@ error_reporting(E_ALL);
 require_once('common.php');
 
     function langsort($a, $b) {
+	// English is always on top
+	if ($a['name'] == 'English')
+		return -1;
+	if ($b['name'] == 'English')
+		return 1;
+
         // Sort by Name
-        $ap = $a['name'];
-        $bp = $b['name'];
+        $an = $a['name'];
+        $bn = $b['name'];
         // Sort by last update revision
-        $ap = $a['last_update_rev'];
-        $bp = $b['last_update_rev'];
+        $au = $a['last_update_rev'];
+        $bu = $b['last_update_rev'];
         // Sort by status
         $ap = $a['percentage'];
         $bp = $b['percentage'];
@@ -36,9 +42,8 @@ require_once('common.php');
         if ($ap == $bp) {
             if ($ac != $bc) {
                 return $ac > $bc ? -1 : 1;
-            }
-            else {
-                return $a['name'] > $b['name'] ? -1 : 1;
+            } else {
+                return $an > $bn ? -1 : 1;
             }
         }
         return $ap < $bp ? 1 : -1;
