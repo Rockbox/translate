@@ -44,9 +44,9 @@ function my_exec($cmd) {
 }
 
 function update_langs() {
+/*
     chmod('rockbox/apps/lang', 0777); // Make sure the web server can write temp files
 
-/*
     // This is no longer needed as we have a cron job doing the git repo update
     $cmds = <<<END
 cd rockbox && /usr/bin/git checkout -f
