@@ -133,8 +133,8 @@ function print_foot() {
 $date = date('D M j H:i:s T Y', file_exists(STATS) ? filemtime(STATS) : 0);
 echo <<<END
 <hr />
-<a href="http://www.rockbox.org">
-  <img src="http://www.rockbox.org/rockbox100.png" border="0" width="100" height="32" alt="www.rockbox.org" title="Rockbox - Open Source Jukebox Firmware" />
+<a href="//www.rockbox.org">
+  <img src="//www.rockbox.org/rockbox100.png" border="0" width="100" height="32" alt="www.rockbox.org" title="Rockbox - Open Source Jukebox Firmware" />
 </a>
 <small>
 Last updated $date. Flags copyright Wikimedia contributors.

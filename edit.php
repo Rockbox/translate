@@ -32,7 +32,7 @@ function edit($lang) {
 Go through this list and follow the instructions given <span class="note">marked in dark red</span>. When
 you're done, press the "Finish translating" button at the bottom of this page.<!-- ' -->
 You will then be sent a patch file with your changes. Submit this file
-to Rockbox on the <a href="http://www.rockbox.org/tracker/newtask/proj1">patch
+to Rockbox on the <a href="//www.rockbox.org/tracker/newtask/proj1">patch
 tracker</a>.
 </p>
 <p>
@@ -166,7 +166,7 @@ echo <<<END
 <p>
 When you click this button, you will be sent a Rockbox language file. If you are
 satisfied with your changes, you're<!-- ' --> encouraged to submit this file in
-the <a href="http://www.rockbox.org/tracker/newtask/proj1">Rockbox patch
+the <a href="//www.rockbox.org/tracker/newtask/proj1">Rockbox patch
 tracker.</a>
 </p>
 END;
