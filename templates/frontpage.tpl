@@ -8,10 +8,11 @@ Ideally, all languages below should be at 100%. In reality though, this is not
 the case. You can help remedy this situation by clicking on the name of a
 language you speak and help translate Rockbox all within the comfort of your
 webbrowser. Alternatively, you can go to <a
-href="http://www.rockbox.org/twiki/bin/view/Main/LangFiles">this page</a> in the
+href="//www.rockbox.org/twiki/bin/view/Main/LangFiles">this page</a> in the
 Rockbox wiki, which will tell you how to update languages the more manual, but
 possibly slightly safer way.
 </p>
+<p>You can also find some stats about <a href="//translate.rockbox.org/whichfont.php">font coverage</a>.</p>
 
 <h2>Current translation status</h2>
 <ul>
@@ -65,7 +66,7 @@ possibly slightly safer way.
         {/if}
         </td>
         <td>
-            <a href='http://git.rockbox.org/?p=rockbox.git;a=commit;h={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
+            <a href='//git.rockbox.org/?p=rockbox.git;a=commit;h={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
                 {$language.last_update|simple_timesince}
             </a>
         </td>
