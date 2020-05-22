@@ -35,6 +35,7 @@ You will then be sent a patch file with your changes. Submit this file
 to Rockbox on the <a href="//www.rockbox.org/tracker/newtask/proj1">patch
 tracker</a>.
 </p>
+<p><b>Please note we will need your full legal name in order to accept any patches, including translation updates!</b></p>
 <p>
 If a field is read-only, it means that this string is not meant to be translated
 and you should leave it as-is. The special string "none" is not meant to be
