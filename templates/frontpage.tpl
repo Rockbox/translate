@@ -66,7 +66,7 @@ possibly slightly safer way.
         {/if}
         </td>
         <td>
-            <a href='//git.rockbox.org/?p=rockbox.git;a=commit;h={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
+            <a href='//git.rockbox.org/cgit/rockbox.git/commit/?id={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
                 {$language.last_update|simple_timesince}
             </a>
         </td>

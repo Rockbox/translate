@@ -93,7 +93,7 @@ if (in_array($langname, $langs)) {
 echo <<<MOO
 Copyright by individual Rockbox contributors
 See
-http://git.rockbox.org/?p=rockbox.git;a=history;f=apps/lang/$langname.lang;hb=HEAD
+https://git.rockbox.org/cgit/rockbox.git/log/apps/lang/$langname.lang
 for details.
 May be distributed under the terms of the GNU GPL version 2 or later
 
