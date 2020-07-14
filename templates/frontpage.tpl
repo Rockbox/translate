@@ -13,6 +13,8 @@ Rockbox wiki, which will tell you how to update languages the more manual, but
 possibly slightly safer way.
 </p>
 <p>You can also find some stats about <a href="//translate.rockbox.org/whichfont.php">font coverage</a>.</p>
+<p><em>Note that the Rockbox Utility is translated separately, please see the 
+<a href="//www.rockbox.org/wiki/Main/RockboxUtilityDevelopment#How_to_Translate">Rockbox Utility Development</a> page on the wiki.</em></p>
 
 <h2>Current translation status</h2>
 <ul>
