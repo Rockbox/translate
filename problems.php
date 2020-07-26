@@ -95,7 +95,7 @@ foreach($phrases as $id => $phrase) {
                 && ($english[$id][$what][$target] == '' || $english[$id][$what][$target] == "none")
                 && trim($value) != trim($english[$id][$what][$target])
                ) {
-                $strings[] = sprintf("<strong>%s:%s - %s</strong>: Empty string doesn't match English (set to: %s - should be: %s)<br />\n",
+                $strings[] = sprintf("<strong>%s:%s - %s</strong>: Empty string doesn't match English (set to: '%s' - should be: '%s')<br />\n",
                     $id,
                     $target,
                     $what,
