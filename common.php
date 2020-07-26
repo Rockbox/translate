@@ -59,10 +59,16 @@ function parselangfile($filename) {
             }
         }
         elseif ($pos == 'phrase' && preg_match("/^([^:]+): ?(.*)$/", $line, $matches)) {
-            $thisphrase[$pos][$matches[1]] = $matches[2];
+            $subs = explode(',' , $matches[1]);
+            foreach($subs as $sub) {
+                $thisphrase[$pos][$sub] = $matches[2];
+            }
         }
         elseif ($pos != 'phrase' && preg_match("/^([^:]+): ?\"?([^\"]*)\"?$/", $line, $matches)) {
-            $thisphrase[$pos][$matches[1]] = $matches[2];
+            $subs = explode(',' , $matches[1]);
+            foreach($subs as $sub) {
+                $thisphrase[$pos][$sub] = $matches[2];
+            }
         }
 
         switch($line) {
