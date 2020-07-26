@@ -58,6 +58,9 @@ function parselangfile($filename) {
                 $thisphrase['notes'][] = $matches[1];
             }
         }
+        elseif (preg_match("/^ *#/", $line, $matches)) {
+            continue;
+        }
         elseif ($pos == 'phrase' && preg_match("/^([^:]+): ?(.*)$/", $line, $matches)) {
             $subs = explode(',' , $matches[1]);
             foreach($subs as $sub) {
