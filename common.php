@@ -62,11 +62,7 @@ function parselangfile($filename) {
             continue;
         }
         elseif ($pos == 'phrase' && preg_match("/^([^:]+): ?(.*)$/", $line, $matches)) {
-            $subs = explode(',' , $matches[1]);
-            foreach($subs as $sub) {
-                $sub = trim($sub);
-                $thisphrase[$pos][$sub] = $matches[2];
-            }
+            $thisphrase[$pos][$matches[1]] = $matches[2];
         }
         elseif ($pos != 'phrase' && preg_match("/^([^:]+): ?\"?([^\"]*)\"?$/", $line, $matches)) {
             $subs = explode(',' , $matches[1]);
