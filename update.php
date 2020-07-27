@@ -87,17 +87,28 @@ function genstats() {
         list($lastrev, $lastupdate) = getlastupdated($lang);
             $stat = array('name' => $lang, 'total' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {
-            switch(trim($line)) {
-                case '### This phrase below was not present in the translated file':
+            if (preg_match('/### This phrase below was not present in the translated file/', $line) || // DELETEME
+                preg_match('/### This phrase is missing entirely, copying from english!/', $line)) {
                     $stat['missing']++;
-                    break;
-                case '### The <source> section differs from the english!':
+            } elseif (preg_match('/### The <source> section differs from the english!/', $line) || // DELETEME
+                      preg_match("/### The <source> section for '.*' is missing! Copying from english!/", $line) ||
+                      preg_match("/### The <source> section for '.*' differs from the english!/", $line)) {
                     $stat['source']++;
-                    break;
-                case '### The \'desc\' field differs from the english!':
+            } elseif (preg_match("/### The 'desc' field differs from the english!/", $line) || // DELETEME
+                      preg_match("/### The 'desc' field for '.*' differs from the english!/", $line) ||
+                      preg_match("/### The 'user' field for '.*' differs from the english!/", $line)) {
                     $stat['desc']++;
-                    break;
-                case '<phrase>':
+            } elseif (preg_match("/### The <dest> section for '.*' is missing! Copying from english!/", $line) ||
+                      preg_match("/### The <dest> section for '.*' is blank! Copying from english!/", $line)) {
+                    $stat['dest']++;
+            } elseif (preg_match("/### The <dest> section for '.*' is identical to english!/", $line)) {
+		    $stat['destdup']++; break;
+            } elseif (preg_match("/### The <voice> section for '.*' is missing! Copying from english!/", $line) ||
+                      preg_match("/### The <voice> section for '.*' is blank! Copying from english!/", $line)) {
+                    $stat['voice']++;
+            } elseif (preg_match("/### The <voice> section for '.*' is identical to english!/", $line)) {
+		    $stat['voicedup']++; break;
+            } elseif (preg_match('/<phrase>/', $line)) {
                     $stat['total']++;
             }
         }
