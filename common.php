@@ -71,6 +71,7 @@ function parselangfile($filename) {
         elseif ($pos != 'phrase' && preg_match("/^([^:]+): ?\"?([^\"]*)\"?$/", $line, $matches)) {
             $subs = explode(',' , $matches[1]);
             foreach($subs as $sub) {
+                $sub = trim($sub);
                 $thisphrase[$pos][$sub] = $matches[2];
             }
         }
