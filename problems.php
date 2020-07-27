@@ -129,6 +129,7 @@ LANG_DISK_NAME_MMC
 LANG_COLOR_RGB_LABELS
 LANG_BYTE
 LANG_KIBIBYTE
+LANG_MIBIBYTE
 LANG_GIBIBYTE
 LANG_USB_HID
 VOICE_ZERO
@@ -209,11 +210,11 @@ if (sizeof($strings) > 0) {
     print(join($strings, ''));
 }
 
-
 $strings = array();
 foreach($english as $id => $phrase) {
     foreach($phrase['source'] as $target => $value) {
-        if (($phrases[$id]['voice'][$target] == ''
+        if (isset($phrases[$id]) &&
+            ($phrases[$id]['voice'][$target] == ''
                 || $phrases[$id]['voice'][$target] == 'none')
                 && $phrase['voice'][$target] != ''
                 && $phrase['voice'][$target] != 'none'
