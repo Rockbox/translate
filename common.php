@@ -19,8 +19,8 @@
  **************************************************************************/
 
 define("PERL", '/usr/bin/perl');
-define("STATS", 'stats.dat');
-define("VERSIONS", 'versions.dat');
+define("STATS", 'scratch/stats.dat');
+define("VERSIONS", 'scratch/versions.dat');
 define("SMALL_FLAGSIZE", '22');
 define("LARGE_FLAGSIZE", '150');
 define("SMARTY_PATH", '/usr/share/php/Smarty');

@@ -3,9 +3,8 @@ rockbox
 templates/compiled
 headers
 
-stats.dat
-versions.dat
-fontcoverage.ini
-missingchars.ini
+scratch/*dat
+scratch/*update
+scratch/*ini
 
 .well-known

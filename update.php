@@ -83,7 +83,7 @@ function genstats() {
         $output = shell_exec($cmd);
 //        print("$ $cmd\n");
 //        printf("%s\n", $output);
-        file_put_contents(sprintf("rockbox/apps/lang/%s.lang.update", $lang), $output);
+        file_put_contents(sprintf("scratch/%s.lang.update", $lang), $output);
         list($lastrev, $lastupdate) = getlastupdated($lang);
             $stat = array('name' => $lang, 'total' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {

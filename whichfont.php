@@ -76,7 +76,7 @@ function getverticalimg($text) {
     return sprintf("<img src='%s' />", $filename);
 }
 
-$fontstats = parse_ini_file('fontcoverage.ini', true);
+$fontstats = parse_ini_file('scratch/fontcoverage.ini', true);
 $langs = languageinfo();
 
 /* Output the first row - font names */
