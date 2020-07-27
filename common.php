@@ -90,6 +90,27 @@ function parselangfile($filename) {
     return $phrases;
 }
 
+function combinetgts($tgtmap) {
+    $strmap = array();
+    $combined = array();
+
+    foreach($tgtmap as $tgt => $string) {
+        if ($tgt == '*') { continue; }
+        if (isset($strmap[$string])) {
+            $strmap[$string] .= ",$tgt";
+        } else {
+            $strmap[$string] = "$tgt";
+        }
+    }
+
+    $combined['*'] = $tgtmap['*'];
+    foreach ($strmap as $string => $tgt) {
+        $combined[$tgt] = $string;
+    }
+
+    return $combined;
+}
+
 function printphrase($phrase) {
     $ret = '';
     $ret .= sprintf("<phrase>\n  id: %s\n  desc:%s\n  user:%s\n",
@@ -101,6 +122,7 @@ function printphrase($phrase) {
     foreach(array('source', 'dest', 'voice') as $field) {
         $ret .= sprintf("  <%s>\n", $field);
         if (isset($phrase[$field])) {
+            $phrase[$field] = combinetgts($phrase[$field]);
             /* If '*' is empty, we don't catch it on the edit-page */
             if (!isset($phrase[$field]['*'])) {
                 $ret .= "    *: \"\"\n";

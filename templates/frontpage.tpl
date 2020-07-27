@@ -33,9 +33,12 @@ possibly slightly safer way.
         <td colspan='4'>Language</td>
         <td>Last update</td>
         <td>Progress</td>
-        <td>Missing strings</td>
+        <td>Missing phrases</td>
         <td>Changed description</td>
         <td>Changed source</td>
+        <td>Missing translation</td>
+        <td>Missing voice</td>
+        <td>Same as English</td>
     </tr>
     </thead>
     {foreach from=$langstats key=langfile item=language}
@@ -61,7 +64,7 @@ possibly slightly safer way.
         {/if}
         </td>
         <td>
-        {if $language.percentage == 100 && $language.desc == 0 && $language.source == 0}
+        {if $language.percentage == 100 && $language.desc == 0 && $language.source == 0 && $language.dest == 0 && $language.voice == 0}
             {$language.name}
         {else}
             <a href='edit.php?lang={$langfile}'>{$language.name}</a>
@@ -77,6 +80,9 @@ possibly slightly safer way.
         <td>{$language.missing}</td>
         <td>{$language.desc}</td>
         <td>{$language.source}</td>
+        <td>{$language.dest}</td>
+        <td>{$language.voice}</td>
+        <td>{$language.voicedup + $language.destdup}</td>
     </tr>
     {/foreach}
 </table>

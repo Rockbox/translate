@@ -79,13 +79,13 @@ function genstats() {
 
     $stats = array();
     foreach($langs as $lang => $rev) {
-        $cmd = sprintf("%s -s rockbox/tools/genlang -u -e=rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang", PERL, $lang);
+        $cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang -", PERL, $lang);
         $output = shell_exec($cmd);
 //        print("$ $cmd\n");
 //        printf("%s\n", $output);
         file_put_contents(sprintf("scratch/%s.lang.update", $lang), $output);
         list($lastrev, $lastupdate) = getlastupdated($lang);
-            $stat = array('name' => $lang, 'total' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
+            $stat = array('name' => $lang, 'total' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'dest' => 0, 'destdup' => 0, 'voice' => 0, 'voicedup' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {
             if (preg_match('/### This phrase below was not present in the translated file/', $line) || // DELETEME
                 preg_match('/### This phrase is missing entirely, copying from english!/', $line)) {
@@ -102,12 +102,12 @@ function genstats() {
                       preg_match("/### The <dest> section for '.*' is blank! Copying from english!/", $line)) {
                     $stat['dest']++;
             } elseif (preg_match("/### The <dest> section for '.*' is identical to english!/", $line)) {
-		    $stat['destdup']++; break;
+		    $stat['destdup']++;
             } elseif (preg_match("/### The <voice> section for '.*' is missing! Copying from english!/", $line) ||
                       preg_match("/### The <voice> section for '.*' is blank! Copying from english!/", $line)) {
                     $stat['voice']++;
             } elseif (preg_match("/### The <voice> section for '.*' is identical to english!/", $line)) {
-		    $stat['voicedup']++; break;
+		    $stat['voicedup']++;
             } elseif (preg_match('/<phrase>/', $line)) {
                     $stat['total']++;
             }

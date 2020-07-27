@@ -46,8 +46,8 @@ translation as well.
 <input type="hidden" name="lang" value="$lang" />
 END;
 
-    $phrases = parselangfile(sprintf("rockbox/apps/lang/%s.lang.update", $lang));
-    $english = parselangfile(sprintf("rockbox/apps/lang/%s.lang.update", 'english'));
+    $phrases = parselangfile(sprintf("scratch/%s.lang.update", $lang));
+    $english = parselangfile(sprintf("scratch/%s.lang.update", 'english'));
     if ($phrases === false || $english === false) {
         printf("<strong>The file %s.lang doesn't exist, or something else went terribly wrong</strong>", $lang);
         return false;

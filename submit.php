@@ -31,7 +31,6 @@ function submit() {
             $langs[$lang] = $version;
         }
     }
-    chdir('rockbox'); // chdir into the rockbox dir to get proper diffs
 
     $i = 0;
     do {
@@ -47,14 +46,14 @@ function submit() {
     }
 
     // Write a header if one exists
-    $original_lines = file(sprintf("apps/lang/%s.lang", $_REQUEST['lang']));
+    $original_lines = file(sprintf("rockbox/apps/lang/%s.lang", $_REQUEST['lang']));
     foreach($original_lines as $i => $line) {
         if (substr($line, 0, 1) == "<") { break; }
         fwrite($fp, $line);
     }
 
-    $original = parselangfile(sprintf("apps/lang/%s.lang.update", $_REQUEST['lang']));
-    $english = parselangfile("apps/lang/english.lang");
+    $original = parselangfile(sprintf("scratch/%s.lang.update", $_REQUEST['lang']));
+    $english = parselangfile("scratch/english.lang");
     print("Copyright by individual Rockbox contributors\n");
     printf("See\nhttps://git.rockbox.org/cgit/rockbox.git/log/apps/lang/%s.lang\nfor details.\n", $_REQUEST['lang']);
     print("May be distributed under the terms of the GNU GPL version 2 or later\n");
@@ -76,7 +75,7 @@ function submit() {
         fwrite($fp, printphrase($phrase));
     }
     fclose($fp);
-    $cmd = sprintf("/usr/bin/diff -u -B -w apps/lang/%s.lang %s", escapeshellarg($_REQUEST['lang']), $filename);
+    $cmd = sprintf("/usr/bin/diff -u -B -w rockbox/apps/lang/%s.lang %s", escapeshellarg($_REQUEST['lang']), $filename);
     print(shell_exec($cmd));
 }
 
