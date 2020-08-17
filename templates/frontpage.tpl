@@ -17,6 +17,7 @@ possibly slightly safer way.
 <a href="//www.rockbox.org/wiki/Main/RockboxUtilityDevelopment#How_to_Translate">Rockbox Utility Development</a> page on the wiki.</em></p>
 
 <h2>Current translation status</h2>
+<p><i>Note: This is updated at most every 15 minutes, but only if the build farm is idle.</i></p>
 <ul>
 {foreach from=$summary key=k item=v}
     <li>{$v} {$k} translations
