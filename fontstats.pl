@@ -112,21 +112,23 @@ foreach my $x (@langs) {
 # Geneate INI files
 # (standard summary)
 foreach my $lang (sort(@langs)) {
-    print "[$lang]\n";
+    $lang =~ /(.*)\.lang/;
+    print "[$1]\n";
     foreach my $font (sort(@fonts)) {
 	my $coverage = calccoverage($lang, $font);
-	print "  $font = $coverage\n";
+        $font =~/(.*).bdf/;
+	printf "  $1 = %1.6f\n", $coverage;
     }
 }
 
 # (missing)
-foreach my $lang (sort(@langs)) {
-    print "[missing|$lang]\n";
-    foreach my $font (sort(@fonts)) {
-	my $str = "";
-	foreach my $missing (keys(%{$missing{$font}{$lang}})) {
-	    $str .= "'$missing' (u+".ord($missing).") ";
-	}
-	print "  $font = $str\n" if ($str);
-    }
-}
+#foreach my $lang (sort(@langs)) {
+#    print "[missing|$lang]\n";
+#    foreach my $font (sort(@fonts)) {
+#	my $str = "";
+#	foreach my $missing (keys(%{$missing{$font}{$lang}})) {
+#	    $str .= "'$missing' (u+".ord($missing).") ";
+#	}
+#	print "  $font = $str\n" if ($str);
+#    }
+#}
