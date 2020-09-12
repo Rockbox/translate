@@ -74,14 +74,14 @@ def calculatecoverage(charsused, charsavailable):
 
 def generate_summary(fontstats, langusage):
     for langfile, charsused in sorted(langusage.items()):
-        print "[%s]" % basename(langfile).replace('.lang', '')
+        print("[%s]" % basename(langfile).replace('.lang', ''))
         for fontfile, charsavailable in sorted(fontstats.items()):
             coverage = calculatecoverage(charsused, charsavailable)
-            print "  %s = %f" % (basename(fontfile).replace('.bdf', ''), coverage)
+            print("  %s = %f" % (basename(fontfile).replace('.bdf', ''), coverage))
 
 def generate_missing(fontstats, langusage):
     for langfile, charsused in sorted(langusage.items()):
-        print "[%s]" % basename(langfile).replace('.lang', '')
+        print("[%s]" % basename(langfile).replace('.lang', ''))
         for fontfile, charsavailable in sorted(fontstats.items()):
             missingchars = []
             for char, uses in charsused.iteritems():
@@ -89,7 +89,7 @@ def generate_missing(fontstats, langusage):
                     missingchars.append(char)
             # If more than 50 characters are missing, don't print them all
             if 25 > len(missingchars) > 0:
-                print "  %s = %s" % (basename(fontfile).replace('.bdf', ''), " ".join(["%s (u+%X)" % (c, ord(c)) for c in missingchars]))
+                print("  %s = %s" % (basename(fontfile).replace('.bdf', ''), " ".join(["%s (u+%X)" % (c, ord(c)) for c in missingchars])))
 
 
 if __name__ == '__main__':
