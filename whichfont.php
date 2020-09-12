@@ -30,6 +30,7 @@ mb_internal_encoding("UTF-8");
 <title>Font coverage of translations</title>
 <link rel="stylesheet" href="rockbox.css" />
 <style type="text/css">
+
 td {
     margin: 0px;
     padding: 0px;
@@ -44,6 +45,22 @@ td.lang {
 td.full {
     background-color: green;
 }
+th {
+    margin: 0px;
+    padding: 0px;
+    vertical-align: bottom;
+}
+
+.rotate {
+ writing-mode: vertical-lr;
+ white-space: nowrap;
+ font-weight: normal;
+ text-orientation: sideways-right;
+ transform: rotate(180deg);
+ font-size: 13px;
+ min-width: 1.25em;
+}
+
 </style>
 </head>
 <body>
@@ -56,25 +73,9 @@ coverage. A <span style="color: green">green</span> square indicates full
 coverage.</p>
 
 <table>
-  <thead>
   <tr>
-    <td></td>
+    <th></th>
 <?php
-
-function getverticalimg($text) {
-    $filename = sprintf('headers/%s.png', str_replace("/", "_", $text));
-    if (!file_exists($filename) || filemtime(__FILE__) > filemtime($filename)) {
-        $height = 200;
-        $width = 11;
-        $im = imagecreate($width, $height);
-        $bg = imagecolorallocate($im, 0x9A, 0xBD, 0xDE);
-        $fg = imagecolorallocate($im, 0, 0, 0);
-        imagestringup($im, 2, -1, $height - 2, $text, $fg);
-        imagecolortransparent($im, $bg);
-        imagepng($im, $filename);
-    }
-    return sprintf("<img src='%s' />", $filename);
-}
 
 $fontstats = parse_ini_file('scratch/fontcoverage.ini', true);
 $langs = languageinfo();
@@ -82,9 +83,9 @@ $langs = languageinfo();
 /* Output the first row - font names */
 if (isset($fontstats['english'])) {
     foreach($fontstats['english'] as $font => $coverage) {
-        printf("    <td>%s</td>\n", getverticalimg($font));
+        printf("    <th><span class=\"rotate\">%s</span></th>\n", $font);
     }
-    print("  </tr>\n  </thead>\n  <tbody>\n");
+    print("  </tr>\n");
 }
 
 foreach($fontstats as $lang => $stats) {

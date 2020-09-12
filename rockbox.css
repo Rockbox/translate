@@ -28,6 +28,11 @@ TD
  padding: 0.3em;
 }
 
+TH
+{
+ background-color: #9ABDDE;
+}
+
 td img {
     border: thin solid black;
 }
