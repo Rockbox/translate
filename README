@@ -4,8 +4,7 @@ Rockbox Translation Editor
 Requirements:
 
   php-Smarty >= 3.0
-  perl   (for language file processing)
-  python (for font converage processing)
+  perl   (for language file & font stats processing)
 
 To set up:   (assuming user/group for web server is apache/apache)
 
@@ -16,11 +15,10 @@ To set up:   (assuming user/group for web server is apache/apache)
 Then set up cron job (or some sort of post-commit hook) to run:
 
  php update.php
- fontstats.py > fontcoverage.ini
- fontstats.py missing > missingchars.ini
+ fontstats.pl > fontcoverage.ini
 
 Note that the only files that matter for these scripts are:
 
    rockbox/tools/genlang       (update.php only)
-   rockbox/apps/lang/*.lang    (both update.php and fontstats.py)
+   rockbox/apps/lang/*.lang    (both update.php and fontstats.pl)
    rockbox/fonts/*.bdf         (fontstats.py only)
