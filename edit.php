@@ -115,6 +115,8 @@ END;
                     // If english voice is either unset, '' or none
                     (!isset($english[$id]['voice'][$target]) || $english[$id]['voice'][$target] == '' || $english[$id]['voice'][$target] == 'none')
                     &&
+                    ($id != 'VOICE_NUMERIC_TENS_SWAP_SEPARATOR')
+                    &&
                     // And voice is not set, or set to '' or none
                     (!isset($phrase['voice'][$target]) || ($phrase['voice'][$target] == '' || $phrase['voice'][$target] == 'none'))
                     ) {
