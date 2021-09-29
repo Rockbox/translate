@@ -50,6 +50,14 @@ possibly slightly safer way.
     {else}
         {assign var='rowclass' value=''}
     {/if}
+    {if ($language.voicedup + $language.destdup) > 400}
+        {assign var='englishclass' value='poor'}
+    {elseif ($language.voicedup + $language.destdup) > 100}
+        {assign var='englishclass' value='questionable'}
+    {else}
+        {assign var='englishclass' value=''}
+    {/if}
+
     <tr class="{$rowclass}">
         <td>
             <img class="flagthumb" src="flags/22/{$language.flag}.png" />
@@ -83,7 +91,7 @@ possibly slightly safer way.
         <td>{$language.source}</td>
         <td>{$language.dest}</td>
         <td>{$language.voice}</td>
-        <td>{$language.voicedup + $language.destdup}</td>
+        <td class="{$englishclass}">{$language.voicedup + $language.destdup}</td>
     </tr>
     {/foreach}
 </table>

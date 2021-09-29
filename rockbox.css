@@ -96,3 +96,9 @@ tr.good td {
 tr.poor td {
     background-color: #DDAA9B;
 }
+td.questionable {
+    background-color: #cccc00;
+}
+td.poor {
+    background-color: #ddaa9b;
+}
