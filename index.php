@@ -76,7 +76,7 @@ function get_stats() {
                    && $info['desc'] == 0:
                 $stats['summary']['complete']++;
                 break;
-            case $info['percentage'] > 95;
+            case $info['percentage'] > 90;
                 $stats['summary']['good']++;
                 break;
             case $info['percentage'] > 50;

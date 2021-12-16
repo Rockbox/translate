@@ -21,7 +21,7 @@ possibly slightly safer way.
 <ul>
 {foreach from=$summary key=k item=v}
     <li>{$v} {$k} translations
-    {if $k=="good"}(&gt;95% translated){/if}
+    {if $k=="good"}(&gt;90% translated){/if}
     {if $k=="normal"}(&gt;50% translated){/if}
     {if $k=="bad"}(&lt;50% translated){/if}
     </li>
