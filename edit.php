@@ -21,7 +21,7 @@
 error_reporting(E_ALL);
 require_once('common.php');
 
-function edit($lang) {
+function edit($lang, $all = false) {
     $languageinfo = languageinfo();
     $LARGE_FLAGSIZE = LARGE_FLAGSIZE;
     echo <<<END
@@ -46,8 +46,8 @@ translation as well.
 <input type="hidden" name="lang" value="$lang" />
 END;
 
-    $phrases = parselangfile(sprintf("scratch/%s.lang.update", $lang));
-    $english = parselangfile(sprintf("scratch/%s.lang.update", 'english'));
+    $phrases = parselangfile(sprintf("scratch/%s.lang.update", $lang), $all);
+    $english = parselangfile(sprintf("scratch/%s.lang.update", 'english'), $all);
     if ($phrases === false || $english === false) {
         printf("<strong>The file %s.lang doesn't exist, or something else went terribly wrong</strong>", $lang);
         return false;
@@ -176,6 +176,6 @@ END;
 }
 
 print_head();
-edit($_REQUEST['lang']);
+edit($_REQUEST['lang'], $_REQUEST['all']);
 print_foot();
 ?>

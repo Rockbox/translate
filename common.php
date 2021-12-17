@@ -34,7 +34,7 @@ function languageinfo() {
     return parse_ini_file('languages.ini', true);
 }
 
-function parselangfile($filename) {
+function parselangfile($filename, $all = false) {
     $lines = @file($filename);
     if (!is_array($lines)) {
         return false;
@@ -53,6 +53,9 @@ function parselangfile($filename) {
     foreach($lines as $lineno => $line) {
         $line = trim($line);
 
+	if ($all == true) {
+            $thisphrase['notes'][0] = "All fields are editable";
+        }
         if (preg_match("/^### (.*)$/", $line, $matches)) {
             if (strpos($matches[1], "The phrase is not used. Skipped") === false) {
                 $thisphrase['notes'][] = $matches[1];
