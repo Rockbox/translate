@@ -218,6 +218,9 @@ if (sizeof($strings) > 0) {
     print(join($strings, ''));
 }
 
+print "<h2>Other actions</h2>\n";
+print "<p>Normally the translation edit page only allows flagged/problematic entries to be edited. To enable editing the entire translation, follow <a href='edit.php?lang=$lang&all=1'>this link</a></p>\n";
+
 if (true || $_SERVER['REMOTE_ADDR'] == trim(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/homeip'))) {
     echo <<<MOO
     <h2>Check your work in progress</h2>
