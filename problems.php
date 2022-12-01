@@ -84,7 +84,7 @@ foreach($english as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Missing strings/targets</h2>\n");
     print("<p>This is an error that should be fixed</p>\n");
-    print(join($strings, ''));
+    print(join('', $strings));
 }
 
 $strings = array();
@@ -109,7 +109,7 @@ foreach($phrases as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Wrong empty strings</h2>");
     print("<p>When the English language is set to \"\" or none, the translation should follow. The strings below don't do this. This is an error and should be fixed.</p>\n");
-    print(join($strings, ''));
+    print(join('', $strings));
 }
 
 $strings = array();
@@ -136,7 +136,7 @@ foreach($phrases as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Identical English and translation</h2>");
     printf("<p>Doesn't have to be a problem, if the string is valid in the %s language</p>\n", $languageinfo[$lang]['name']);
-    print(join($strings, ''));
+    print(join('', $strings));
 }
 
 $strings = array();
@@ -159,7 +159,7 @@ foreach($english as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Missing voice strings</h2>");
     printf("<p>This is almost certainly a mistake unless the string does not make sense in the %s language, and should be fixed before it's possible to generate meaningful voicefiles for the %s language.</p>\n", $languageinfo[$lang]['name'], $languageinfo[$lang]['name']);
-    print(join($strings, ''));
+    print(join('', $strings));
 }
 
 $strings = array();
@@ -190,7 +190,7 @@ foreach($phrases as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Same voice and source</h2>");
     printf("<p>Doesn't have to be a problem, if the string is valid in the %s language</p>\n", $languageinfo[$lang]['name']);
-    print(join($strings, ''));
+    print(join('', $strings));
 }
 
 print("<!--\n");
@@ -215,7 +215,7 @@ foreach($phrases as $id => $phrase) {
 if (sizeof($strings) > 0) {
     print("<h2>Unnecessary voice strings</h2>");
     print("<p>These strings are unnecessary, since they're not defined in the English language file. They should probably be removed</p>\n");
-    print(join($strings, ''));
+    print(join('', $strings));
 }
 
 print "<h2>Other actions</h2>\n";
