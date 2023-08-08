@@ -52,7 +52,7 @@ require_once('common.php');
 function get_stats() {
     $languageinfo = languageinfo();
     $stats['langstats'] = (file_exists(STATS) ? unserialize(file_get_contents(STATS)) : array());
-    $stats['summary'] = array('complete' => 0, 'good' => 0, 'normal' => 0, 'bad' => 0);
+    $stats['summary'] = array('complete' => -1, 'good' => 0, 'normal' => 0, 'bad' => 0);
     foreach($stats['langstats'] as $name => &$info) {
         if ($name == 'summary') continue;
         $info['percentage'] = ($info['total'] - $info['missing']) / $info['total'] * 100;
