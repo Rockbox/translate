@@ -43,7 +43,7 @@ possibly slightly safer way.
     </tr>
     </thead>
     {foreach from=$langstats key=langfile item=language}
-    {if $language.percentage == 100}
+    {if $language.percentage == 100 && $language.source == 0}
         {assign var='rowclass' value='good'}
     {elseif $language.percentage < 50}
         {assign var='rowclass' value='poor'}
