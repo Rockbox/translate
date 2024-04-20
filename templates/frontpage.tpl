@@ -8,13 +8,13 @@ Ideally, all languages below should be at 100%. In reality though, this is not
 the case. You can help remedy this situation by clicking on the name of a
 language you speak and help translate Rockbox all within the comfort of your
 webbrowser. Alternatively, you can go to <a
-href="//www.rockbox.org/twiki/bin/view/Main/LangFiles">this page</a> in the
+href="//www.rockbox.org/wiki/LangFiles">this page</a> in the
 Rockbox wiki, which will tell you how to update languages the more manual, but
 possibly slightly safer way.
 </p>
 <p>You can also find some stats about <a href="//translate.rockbox.org/whichfont.php">font coverage</a>.</p>
 <p><em>Note that the Rockbox Utility is translated separately, please see the 
-<a href="//www.rockbox.org/wiki/Main/RockboxUtilityDevelopment#How_to_Translate">Rockbox Utility Development</a> page on the wiki.</em></p>
+<a href="//www.rockbox.org/wiki/RockboxUtilityDevelopment#How_to_Translate">Rockbox Utility Development</a> page on the wiki.</em></p>
 
 <h2>Current translation status</h2>
 <p><i>Note: This is updated at most every 15 minutes, but only if the build farm is idle.</i></p>
