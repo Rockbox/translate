@@ -73,7 +73,7 @@ possibly slightly safer way.
         {/if}
         </td>
         <td>
-        {if $language.percentage == 100 && $language.desc == 0 && $language.source == 0 && $language.dest == 0 && $language.voice == 0}
+        {if $language.percentage == 100 && $language.desc == 0 && $language.source == 0 && $language.dest == 0 && $language.voice == 0 && ($language.voicedup + $language.destdup) == 0 }
             {$language.name}
         {else}
             <a href='edit.php?lang={$langfile}'>{$language.name}</a>
