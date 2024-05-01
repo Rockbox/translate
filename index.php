@@ -31,22 +31,22 @@ require_once('common.php');
         $an = $a['name'];
         $bn = $b['name'];
         // Sort by last update revision
-        $au = $a['last_update_rev'];
-        $bu = $b['last_update_rev'];
+//        $au = $a['last_update_rev'];
+//        $bu = $b['last_update_rev'];
         // Sort by status
         $ap = $a['percentage'];
         $bp = $b['percentage'];
+        // Sort by missing
+        $ac = $a['source'] + $a['desc'] + $a['dest'] + $a['voice'];
+        $bc = $b['source'] + $b['desc'] + $b['dest'] + $b['voice'];
 
-        $ac = $a['desc'] + $a['source'];
-        $bc = $b['desc'] + $b['source'];
-        if ($ap == $bp) {
-            if ($ac != $bc) {
-                return $ac > $bc ? -1 : 1;
-            } else {
-                return $an > $bn ? -1 : 1;
-            }
-        }
-        return $ap < $bp ? 1 : -1;
+	if ($ap != $bp) {
+	        return $ap < $bp ? 1 : -1;
+	}
+	if ($ac != $bc) {
+	        return $ac < $bc ? -1 : 1;
+	}
+        return $an < $bn ? -1 : 1;
     }
 
 function get_stats() {
@@ -73,7 +73,9 @@ function get_stats() {
         switch(true) {
             case $info['percentage'] == 100
                    && $info['source'] == 0
-                   && $info['desc'] == 0:
+                   && $info['desc'] == 0
+                   && $info['dest'] == 0
+                   && $info['voice'] == 0:
                 $stats['summary']['complete']++;
                 break;
             case $info['percentage'] > 90;
