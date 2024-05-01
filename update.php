@@ -98,6 +98,7 @@ function genstats() {
             } elseif (preg_match("/### The <dest> section for '.*' is missing/", $line) ||
                       preg_match("/### The <dest> section for '.*' is blank/", $line) ||
                       preg_match("/### The <dest> section for '.*' is not blank/", $line) ||
+                      preg_match("/### The <dest> section for '.*' has illegal/", $line) ||
                       preg_match("/### The <dest> section for '.*' has incorrect/", $line)) {
                     $stat['dest']++;
             } elseif (preg_match("/### The <dest> section for '.*' is identica/", $line)) {
