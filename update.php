@@ -43,40 +43,57 @@ function genstats() {
 
     $stats = array();
     foreach($langs as $lang => $rev) {
+        $foo = array();
+        $err = 0;
         $cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang -", PERL, $lang);
         $output = shell_exec($cmd);
 //        print("$ $cmd\n");
 //        printf("%s\n", $output);
         file_put_contents(sprintf("scratch/%s.lang.update", $lang), $output);
         list($lastrev, $lastupdate) = getlastupdated($lang);
-            $stat = array('name' => $lang, 'total' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'dest' => 0, 'destdup' => 0, 'voice' => 0, 'voicedup' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
+            $stat = array('name' => $lang, 'total' => 0, 'error' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'dest' => 0, 'destdup' => 0, 'voice' => 0, 'voicedup' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {
             if (preg_match('/### This phrase is missing entirely/', $line)) {
                     $stat['missing']++;
+                    $err++;
             } elseif (preg_match("/### The <source> section for '.*' is missing/", $line) ||
                       preg_match("/### The <source> section for '.*' differs/", $line)) {
                     $stat['source']++;
+                    $err++;
             } elseif (preg_match("/### The 'desc' field for '.*' differs/", $line) ||
                       preg_match("/### The 'user' field for '.*' differs/", $line)) {
                     $stat['desc']++;
+                    $err++;
             } elseif (preg_match("/### The <dest> section for '.*' is missing/", $line) ||
                       preg_match("/### The <dest> section for '.*' is blank/", $line) ||
                       preg_match("/### The <dest> section for '.*' is not blank/", $line) ||
                       preg_match("/### The <dest> section for '.*' has illegal/", $line) ||
                       preg_match("/### The <dest> section for '.*' has incorrect/", $line)) {
                     $stat['dest']++;
+                    $err++;
             } elseif (preg_match("/### The <dest> section for '.*' is identica/", $line)) {
 		    $stat['destdup']++;
+                    $err++;
             } elseif (preg_match("/### The <voice> section for '.*' is missing/", $line) ||
                       preg_match("/### The <voice> section for '.*' is blank/", $line) ||
                       preg_match("/### The <voice> section for '.*' is not blank/", $line) ||
                       preg_match("/### The <voice> section for '.*' has suspicious/", $line)) {
                     $stat['voice']++;
+                    $err++;
             } elseif (preg_match("/### The <voice> section for '.*' is identical/", $line)) {
 		    $stat['voicedup']++;
-            } elseif (preg_match('/<phrase>/', $line)) {
+                    $err++;
+            } elseif (preg_match('/<\/phrase>/', $line)) {
                     $stat['total']++;
+                    $err = 0;
+            } elseif (preg_match('/id: (.*)/', $line, $matches)) {
+                    $foo[$matches[1]] = $err;
             }
+        }
+        foreach($foo as $id => $val) {
+                if ($val > 0) {
+                        $stat['error']++;
+                }
         }
         $stats[$lang] = $stat;
     }

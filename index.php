@@ -55,7 +55,7 @@ function get_stats() {
     $stats['summary'] = array('complete' => -1, 'good' => 0, 'normal' => 0, 'bad' => 0);
     foreach($stats['langstats'] as $name => &$info) {
         if ($name == 'summary') continue;
-        $info['percentage'] = ($info['total'] - $info['missing']) / $info['total'] * 100;
+        $info['percentage'] = ($info['total'] - $info['error']) / $info['total'] * 100;
         if (isset($languageinfo[$name])) {
             $info = array_merge($info, $languageinfo[$name]);
         }
