@@ -22,43 +22,7 @@ error_reporting(E_ALL);
 require_once('common.php');
 chdir(dirname(__FILE__));
 
-function my_exec($cmd) {
-    $descriptorspec = array(
-       0 => array("pipe", "r"),
-       1 => array("pipe", "w"),
-       2 => array("pipe", "w"),
-    );
-    $p = proc_open($cmd, $descriptorspec, $pipes);
-    if (is_resource($p)) {
-        $stdout = stream_get_contents($pipes[1]);
-        $stderr = stream_get_contents($pipes[2]);
-        fclose($pipes[0]);
-        fclose($pipes[1]);
-        fclose($pipes[2]);
-        $retval = proc_close($p);
-        return array($retval, $stdout, $stderr);
-    }
-    else {
-        return false;
-    }
-}
-
 function update_langs() {
-/*
-    chmod('rockbox/apps/lang', 0777); // Make sure the web server can write temp files
-
-    // This is no longer needed as we have a cron job doing the git repo update
-    $cmds = <<<END
-cd rockbox && /usr/bin/git checkout -f
-cd rockbox && /usr/bin/git pull
-END;
-    foreach(explode("\n", $cmds) as $cmd) {
-        print("$ ".$cmd."\n");
-        list($retval, $stdout, $stderr) = my_exec($cmd);
-        if ($retval == 0) { print($stdout); }
-        else { printf("retval: %d\nSTDOUT:\n%s\nSTDERR:\n%s\n--------------------------------------------------\n", $retval, $stdout, $stderr); }
-    }
-*/
     $fp = fopen(VERSIONS, 'w');
     foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
         $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H -1 %s",
