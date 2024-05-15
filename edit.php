@@ -33,13 +33,15 @@ Go through this list and follow the instructions given <span class="note">marked
 you're done, press the "Finish translating" button at the bottom of this page.<!-- ' -->
 You will then be sent a patch file with your changes. Submit this file
 to Rockbox on the <a href="//www.rockbox.org/tracker/newtask/proj1">patch
-tracker</a>. <b>Please note we will need your full legal name in order to accept any patches, including translation updates!</b></p>
+tracker</a>.
 </p>
 <p>Other notes:</p>
 <ul>
-<li>If a field is read-only, it means that this string is not meant to be translated and you should leave it as-is.</li>
-<li>The special string "none" is not meant to be translated, so if you see it in the english version, put "none" in the translation as well.</li>
-<li>Normally, if a translated string is the same as the original English, this is treated as an error. If this is intentional, please add '~' to the beginning of any same-as-English strings.</li>
+<li><b>We will need your full legal name in order to accept any patches, including translation updates!</b></li>
+<li>If a field is read-only, it means that this string is not meant to be translated and will not be editable.</li>
+<li>The special string "none" is not meant to be translated, and will not allow edits.</li>
+<li>Voice strings cannot include C format specifiers (eg '%d') and other suspicious characters such as quotation marks.</li>
+<li>Normally, if a translated string is the same as the original English, this is treated as an error. To bypass this test for specific strings, please prepend them with '~'. (For example, instead of 'something' you would write '~something')</li>
 </ul>
 <form action="submit.php" method="post">
 <input type="hidden" name="lang" value="$lang" />
