@@ -36,7 +36,7 @@ if (in_array($langname, $langs)) {
     if (isset($_GET['sendfile']))
         header(sprintf("Content-Disposition: attachment; filename=%s-fix-%s.diff", $langname, str_replace('/', '_', implode(',', $cmds))));
     $langfile = sprintf("rockbox/apps/lang/%s.lang", $langname);
-    $tempname = sprintf('rockbox/apps/lang/%s.lang-fixlang-%s', $langname, uniqid('',$_SERVER['REMOTE_ADDR'].$langname));
+    $tempname = sprintf('/tmp/%s.lang-fixlang-%s', $langname, uniqid('',$_SERVER['REMOTE_ADDR'].$langname));
     $lang = parselangfile($langfile);
     $english = parselangfile("rockbox/apps/lang/english.lang");
 
