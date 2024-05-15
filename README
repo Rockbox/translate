@@ -19,6 +19,6 @@ Then set up cron job (or some sort of post-commit hook) to run:
 
 Note that the only files that matter for these scripts are:
 
-   rockbox/tools/genlang       (update.php only)
+   rockbox/tools/updatelang    (update.php only)
    rockbox/apps/lang/*.lang    (both update.php and fontstats.pl)
-   rockbox/fonts/*.bdf         (fontstats.py only)
+   rockbox/fonts/*.bdf         (fontstats.pl only)
