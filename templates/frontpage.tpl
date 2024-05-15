@@ -31,7 +31,7 @@ possibly slightly safer way.
 <table>
     <thead>
     <tr>
-        <td colspan='4'>Language</td>
+        <td colspan='3'>Language</td>
         <td>Last update</td>
         <td>Progress</td>
         <td>Missing phrases</td>
@@ -65,11 +65,6 @@ possibly slightly safer way.
         <td>
 	{if $langfile != 'english'}
             <a href='problems.php?lang={$langfile}'><img style='border: none' src='warning.gif' width='16' height='16' /></a>
-        {/if}
-        </td>
-        <td>
-        {if file_exists('graphs/$langfile')}
-            <a href='graphs/{$langfile}.png'><img style='border: none' src='graph.png' width='16' height='16' /></a>
         {/if}
         </td>
         <td>
