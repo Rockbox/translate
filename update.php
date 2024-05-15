@@ -105,7 +105,7 @@ function getlastupdated($lang) {
     $retries = 0;
     while ($retries < 5) {
         try {
-            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H,%%ct -50 apps/lang/%s.lang", $lang));
+            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H,%%ct -200 apps/lang/%s.lang", $lang));
             $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
             $retries = 100;
         }
