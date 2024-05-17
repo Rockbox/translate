@@ -42,6 +42,7 @@ tracker</a>.
 <li>The special string "none" is not meant to be translated, and will not allow edits.</li>
 <li>Voice strings cannot include C format specifiers (eg '%d') and other suspicious characters such as quotation marks or ellipses.</li>
 <li>Normally, if a translated string is the same as the original English, this is treated as an error. To bypass this test for specific strings, please prepend them with '~'. (For example, instead of 'something' you would write '~something')</li>
+<li>There is a set of corrections automatically applied to voice strings; for example spelling out common acronyms or fixing mispronounciations in a TTS engine.  See <a href="https://git.rockbox.org/cgit/rockbox.git/tree/tools/voice-corrections.txt">voice-corrections.txt</a> for specifics.</li>
 </ul>
 <form action="submit.php" method="post">
 <input type="hidden" name="lang" value="$lang" />
