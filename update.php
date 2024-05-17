@@ -78,6 +78,7 @@ function genstats() {
                       preg_match("/### The <voice> section for '.*' is blank/", $line) ||
                       preg_match("/### The <voice> section for '.*' is not blank/", $line) ||
                       preg_match("/### The <voice> section for '.*' has suspicious/", $line)) {
+                      preg_match("/### The <voice> section for '.*' has ellipses/", $line)) {
                     $stat['voice']++;
                     $err++;
             } elseif (preg_match("/### The <voice> section for '.*' is identical/", $line)) {
