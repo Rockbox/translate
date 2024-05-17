@@ -71,7 +71,9 @@ END;
                 foreach($phrase['notes'] as $line) {
 		    if (preg_match('/The <(.+)> section for \'.+:(.*)\'.+/', $line, $matches)) {
 	                $foo["$matches[1]:$matches[2]"] = 1;
-			print("<!-- '$matches[1]:$matches[2]' -->\n");
+	            } elseif (preg_match('/This phrase is missing/', $line)) {
+	                $foo["dest"] = 1;
+	                $foo["voice"] = 1;
 	            }
                     printf("%s<br />\n", htmlspecialchars($line));
                 }
@@ -133,7 +135,8 @@ END;
                 }
 
                 print("<tr>");
-		if (array_key_exists("dest:$target", $foo)) {
+		if (array_key_exists("dest:$target", $foo) ||
+		    array_key_exists("dest", $foo)) {
 			$bgcolor='class="poor"';
                 } else {
 			$bgcolor='';
@@ -150,7 +153,8 @@ END;
                     $translated_readonly
                 );
 
-		if (array_key_exists("voice:$target", $foo)) {
+		if (array_key_exists("voice:$target", $foo) ||
+		    array_key_exists("voice", $foo)) {
 			$bgcolor='class="poor"';
                 } else {
 			$bgcolor='';
