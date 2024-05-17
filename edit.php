@@ -57,6 +57,7 @@ END;
     $inputlang = isset($languageinfo[$lang]['code']) && $languageinfo[$lang]['code'] != '' ? sprintf(" lang='%s' ", $languageinfo[$lang]['code']) : '';
     $inputdir = isset($languageinfo[$lang]['rtl']) && $languageinfo[$lang]['rtl'] === true ? " dir='rtl' " : '';
     foreach($phrases as $id => $phrase) {
+        $foo = array();
         if (sizeof($phrase['notes']) > 0 && trim(strtolower($phrase['phrase']['desc'])) != "deprecated") {
             printf("<h3>%s</h3>", $phrase['phrase']['id']);
 
@@ -68,6 +69,10 @@ END;
             if (sizeof($phrase['notes']) > 0) {
                 print("<div class='note'>");
                 foreach($phrase['notes'] as $line) {
+		    if (preg_match('/The <(.+)> section for \'.+:(.*)\'.+/', $line, $matches)) {
+	                $foo["$matches[1]:$matches[2]"] = 1;
+			print("<!-- '$matches[1]:$matches[2]' -->\n");
+	            }
                     printf("%s<br />\n", htmlspecialchars($line));
                 }
                 print("</div>");
@@ -128,7 +133,13 @@ END;
                 }
 
                 print("<tr>");
-                printf("<td>%s</td><td>%s</td><td><input %s %s name='phrases[%s][dest][%s]' size='40' type='text' value='%s' %s /></td>",
+		if (array_key_exists("dest:$target", $foo)) {
+			$bgcolor='class="poor"';
+                } else {
+			$bgcolor='';
+		}
+
+                printf("<td>%s</td><td>%s</td><td $bgcolor><input %s %s name='phrases[%s][dest][%s]' size='40' type='text' value='%s' %s /></td>",
                     htmlspecialchars($target),
                     htmlspecialchars($string),
                     $inputlang,
@@ -139,11 +150,18 @@ END;
                     $translated_readonly
                 );
 
+		if (array_key_exists("voice:$target", $foo)) {
+			$bgcolor='class="poor"';
+                } else {
+			$bgcolor='';
+		}
+
+
                 if (!isset($english[$id]['voice'][$target])) {
                     print("<td colspan='2'></td>");
                 }
                 else {
-                    printf("<td>%s</td><td><input %s %s name='phrases[%s][voice][%s]' size='40' type='text' value='%s' %s /></td>",
+                    printf("<td>%s</td><td $bgcolor><input %s %s name='phrases[%s][voice][%s]' size='40' type='text' value='%s' %s /></td>",
                         htmlspecialchars(isset($english[$id]['voice'][$target]) ? $english[$id]['voice'][$target] : ''),
                         $inputlang,
                         $inputdir,
