@@ -40,7 +40,7 @@ tracker</a>.
 <li><b>We will need your full legal name in order to accept any patches, including translation updates!</b></li>
 <li>If a field is read-only, it means that this string is not meant to be translated and will not be editable.</li>
 <li>The special string "none" is not meant to be translated, and will not allow edits.</li>
-<li>Voice strings cannot include C format specifiers (eg '%d') and other suspicious characters such as quotation marks.</li>
+<li>Voice strings cannot include C format specifiers (eg '%d') and other suspicious characters such as quotation marks or ellipses.</li>
 <li>Normally, if a translated string is the same as the original English, this is treated as an error. To bypass this test for specific strings, please prepend them with '~'. (For example, instead of 'something' you would write '~something')</li>
 </ul>
 <form action="submit.php" method="post">

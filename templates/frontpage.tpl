@@ -34,11 +34,11 @@ possibly slightly safer way.
         <td colspan='3'>Language</td>
         <td>Last update</td>
         <td>Progress</td>
-        <td>Missing phrases</td>
-        <td>Changed description</td>
-        <td>Changed source</td>
-        <td>Missing translation</td>
-        <td>Missing voice</td>
+        <td>Phrases missing</td>
+        <td>Description changed</td>
+        <td>Source changed</td>
+        <td>Translation missing or errors</td>
+        <td>Voice missing or errors</td>
         <td>Same as English</td>
     </tr>
     </thead>
