@@ -16,3 +16,6 @@ Disallow: /
 User-agent: *
 Allow: index.php
 Disallow: /
+Disallow: /graph.php
+Disallow: /edit.php
+Disallow: /problems.php
