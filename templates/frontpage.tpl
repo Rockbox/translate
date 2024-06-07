@@ -20,7 +20,7 @@ possibly slightly safer way.
 <p><i>Note: This is updated at most every 15 minutes, but only if the build farm is idle.</i></p>
 <ul>
 {foreach from=$summary key=k item=v}
-    <li>{$v} {$k} translations
+    <li>{$v} {$k} translation{if $v!=1}s{/if}
     {if $k=="good"}(&gt;90% translated){/if}
     {if $k=="normal"}(&gt;50% translated){/if}
     {if $k=="bad"}(&lt;50% translated){/if}
