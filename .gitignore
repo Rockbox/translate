@@ -7,4 +7,6 @@ scratch/*dat
 scratch/*update
 scratch/*ini
 
+maintainers.ini
+
 .well-known

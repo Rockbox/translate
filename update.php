@@ -98,7 +98,55 @@ function genstats() {
         }
         $stats[$lang] = $stat;
     }
+
+    /* Read in old language stats */
+    $oldstats = get_stats();
+
+    /* Write out new stats */
     file_put_contents(STATS, serialize($stats));
+
+    /* Re-read stats */
+    $stats = get_stats();
+
+    /* Read in maintainers list */
+    $maintainers = maintainerinfo();
+
+    if ($maintainers !== FALSE) {
+      /* Find out if anything has changed */
+      foreach($stats['langstats'] as $lang => &$info) {
+        if (isset($maintainers[$lang])) {
+            $oldinfo = $oldstats['langstats'][$lang];
+	    foreach($maintainers[$lang] as $id => $email) {
+              if ($info['percentage'] > $oldinfo['percentage']) {
+	        $headers = sprintf("From: %s", OUTBOUND_EMAIL);
+		$subject = sprintf("Rockbox '%s' translation needs updating\n", $lang);
+		$msg = sprintf("
+
+You are receiving this as you are listed as a maintainer for the
+'%s' Rockbox translation.  Please contact the admins if this is
+in error.
+
+Current translation status:
+  percent complete:    %s
+  missing strings:     %s
+  source differs:      %s
+  description differs: %s
+  destination issues:  %s
+  voice issues:        %s
+
+Please submit an update at your convenience!
+
+",
+                 $lang, $info['percentage'], $info['missing'], $info['source'],
+                 $info['desc'], $info['dest'], $info['voice']);
+
+		mail($email, $subject, $msg, $headers);
+            }
+          }
+        }
+      }
+    }
+
     return true;
 }
 
