@@ -117,7 +117,7 @@ function genstats() {
         if (isset($maintainers[$lang])) {
             $oldinfo = $oldstats['langstats'][$lang];
 	    foreach($maintainers[$lang] as $id => $email) {
-              if ($info['percentage'] > $oldinfo['percentage']) {
+              if ($info['percentage'] < $oldinfo['percentage']) {
 	        $headers = sprintf("From: %s", OUTBOUND_EMAIL);
 		$subject = sprintf("Rockbox '%s' translation needs updating\n", $lang);
 		$msg = sprintf("
