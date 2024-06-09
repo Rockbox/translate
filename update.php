@@ -126,19 +126,20 @@ You are receiving this as you are listed as a maintainer for the
 '%s' Rockbox translation.  Please contact the admins if this is
 in error.
 
-Current translation status:
+Current translation status as of %s:
   percent complete:    %s
   missing strings:     %s
-  source differs:      %s
-  description differs: %s
+  source changed:      %s
+  description changed: %s
   destination issues:  %s
   voice issues:        %s
 
 Please submit an update at your convenience!
 
 ",
-                 $lang, $info['percentage'], $info['missing'], $info['source'],
-                 $info['desc'], $info['dest'], $info['voice']);
+                 $lang, substr($stats['langstats']['english']['last_update_rev'], 0, 10),
+		 $info['percentage'], $info['missing'], $info['source'],
+                 $info['desc'], $info['dest'] + $info['destdup'], $info['voice'] + $info['voicedup']);
 
 		mail($email, $subject, $msg, $headers);
             }
