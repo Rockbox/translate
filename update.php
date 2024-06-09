@@ -116,6 +116,7 @@ function genstats() {
       foreach($stats['langstats'] as $lang => &$info) {
         if (isset($maintainers[$lang])) {
             $oldinfo = $oldstats['langstats'][$lang];
+//            $info['percentage']--; // XXX for testing only.
 	    foreach($maintainers[$lang] as $id => $email) {
               if ($info['percentage'] < $oldinfo['percentage']) {
 	        $headers = sprintf("From: %s", OUTBOUND_EMAIL);
@@ -133,13 +134,14 @@ Current translation status as of %s:
   description changed: %s
   destination issues:  %s
   voice issues:        %s
+  same as english:     %s
 
 Please submit an update at your convenience!
 
 ",
                  $lang, substr($stats['langstats']['english']['last_update_rev'], 0, 10),
 		 $info['percentage'], $info['missing'], $info['source'],
-                 $info['desc'], $info['dest'] + $info['destdup'], $info['voice'] + $info['voicedup']);
+                 $info['desc'], $info['dest'], $info['voice'], $info['destdup'] + $info['voicedup']);
 
 		mail($email, $subject, $msg, $headers);
             }
