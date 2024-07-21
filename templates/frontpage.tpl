@@ -63,7 +63,7 @@ possibly slightly safer way.
             <img class="flagthumb" src="flags/22/{$language.flag}.png" />
         </td>
         <td>
-	{if $langfile != 'english'}
+	{if $langfile != 'english' && $language.percentage < 100}
             <a href='problems.php?lang={$langfile}'><img style='border: none' src='warning.gif' width='16' height='16' /></a>
         {/if}
         </td>
