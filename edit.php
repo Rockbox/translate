@@ -190,14 +190,24 @@ END;
         }
     }
 echo <<<END
-<input type="submit" value="Finish translating" style="margin-top: 1em" />
-</form>
-<p>
-When you click this button, you will be sent a Rockbox language file. If you are
-satisfied with your changes, you're<!-- ' --> encouraged to submit this file in
-the <a href="//www.rockbox.org/tracker/newtask/proj1">Rockbox patch
+<br/>
+<table cols="2">
+<tr>
+<td><input type="submit" value="Create Patch" name"patch" style="margin-top: 1em" /></td>
+<td>
+When you click this button, you will be sent a patch against the currently-committed language file. If you are
+satisfied with your changes, you are encouraged to submit this file in the <a href="//www.rockbox.org/tracker/newtask/proj1">Rockbox patch
 tracker.</a>
-</p>
+</td>
+</tr>
+<tr>
+<td><input type="submit" value="Create Full" name="full" style="margin-top: 1em" /></td>
+<td>
+When you click this button, you will be sent the entire language file incorporating your changes.
+</td>
+</tr>
+</table>
+</form>
 END;
 }
 
