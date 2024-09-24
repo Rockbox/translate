@@ -43,8 +43,9 @@ sub fontcoverage($) {
 
 sub langcoverage($) {
     my ($lang) = @_;
+    $lang =~ s/(.*)\.lang/$1/;
 
-    open(FILE, "<rockbox/apps/lang/$lang") || die ("can't open $lang!\n");
+    open(FILE, "<rockbox/apps/lang/$lang.lang") || die ("can't open $lang!\n");
     binmode(FILE, ":utf8");
     my $indest = 0;
     while(<FILE>) {
@@ -112,8 +113,8 @@ foreach my $x (@langs) {
 # Geneate INI files
 # (standard summary)
 foreach my $lang (sort(@langs)) {
-    $lang =~ /(.*)\.lang/;
-    print "[$1]\n";
+    $lang =~ s/(.*)\.lang/$1/;
+    print "[$lang]\n";
     foreach my $font (sort(@fonts)) {
 	my $coverage = calccoverage($lang, $font);
         $font =~/(.*).bdf/;
@@ -122,13 +123,15 @@ foreach my $lang (sort(@langs)) {
 }
 
 # (missing)
-#foreach my $lang (sort(@langs)) {
-#    print "[missing|$lang]\n";
-#    foreach my $font (sort(@fonts)) {
-#	my $str = "";
-#	foreach my $missing (keys(%{$missing{$font}{$lang}})) {
-#	    $str .= "'$missing' (u+".ord($missing).") ";
-#	}
-#	print "  $font = $str\n" if ($str);
-#    }
-#}
+foreach my $lang (sort(@langs)) {
+    $lang =~ s/(.*)\.lang/$1/;
+    print "[missing|$lang]\n";
+    foreach my $font (sort(@fonts)) {
+        $font =~/(.*).bdf/;
+	my $str = "";
+	foreach my $missing (keys(%{$missing{$font}{$lang}})) {
+	    $str .= "u+".ord($missing)."[$missing] ";
+	}
+	print "  $1 = $str\n" if ($str);
+    }
+}

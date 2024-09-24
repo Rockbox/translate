@@ -89,8 +89,15 @@ if (isset($fontstats['english'])) {
 }
 
 foreach($fontstats as $lang => $stats) {
+    if (substr($lang, 0, 7) === 'missing') {
+        continue;
+    }
     printf("  <tr>\n    <td class='lang'><img src='flags/%d/%s.png' /> %s</td>\n",SMALL_FLAGSIZE, urlencode($langs[$lang]['flag']), $langs[$lang]['name']);
     foreach($stats as $font => $coverage) {
+        $hover = "";
+        if (isset($fontstats["missing|$lang"]) && isset($fontstats["missing|$lang"][$font])) {
+            $hover = $fontstats["missing|$lang"][$font];
+        }
         if ($coverage == 1) {
             printf("    <td class='full' title='%s has full coverage of %s'>&nbsp;</td>\n", $font, $lang);
         }
@@ -98,7 +105,7 @@ foreach($fontstats as $lang => $stats) {
             $r = 0x9A * (1-$coverage);
             $g = 0xBD * (1-$coverage);
             $b = 0xDE * (1-$coverage);
-            printf("    <td style='background-color: #%02X%02X%02X' title='%s has %0.2f%% coverage of %s'>&nbsp;</td>", $r, $g, $b, $font, $coverage*100, $lang);
+            printf("    <td style='background-color: #%02X%02X%02X' title='%s has %0.2f%% coverage of %s $hover'>&nbsp;</td>\n", $r, $g, $b, $font, $coverage*100, $lang);
         }
     }
     print("  </tr>\n");
