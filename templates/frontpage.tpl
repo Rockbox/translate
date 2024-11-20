@@ -32,6 +32,7 @@ possibly slightly safer way.
     <thead>
     <tr>
         <td colspan='3'>Language</td>
+        <td>Voiced</td>
         <td>Last update</td>
         <td>Progress</td>
         <td>Phrases missing</td>
@@ -72,6 +73,11 @@ possibly slightly safer way.
             {$language.name}
         {else}
             <a href='edit.php?lang={$langfile}'>{$language.name}</a>
+        {/if}
+        </td>
+        <td>
+        {if $language.voiced}
+            {$language.voiced}
         {/if}
         </td>
         <td>

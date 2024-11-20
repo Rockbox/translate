@@ -132,7 +132,7 @@ function parselangfile($filename, $all = false) {
 function get_stats() {
     $languageinfo = languageinfo();
     $stats['langstats'] = (file_exists(STATS) ? unserialize(file_get_contents(STATS)) : array());
-    $stats['summary'] = array('complete' => -1, 'good' => 0, 'normal' => 0, 'bad' => 0);
+    $stats['summary'] = array('complete' => -1, 'good' => 0, 'normal' => 0, 'bad' => 0 , 'voiced' => 0);
     foreach($stats['langstats'] as $name => &$info) {
         if ($name == 'summary') continue;
         $info['percentage'] = ($info['total'] - $info['error']) / $info['total'] * 100;
@@ -167,6 +167,9 @@ function get_stats() {
             default:
                 $stats['summary']['bad']++;
                 break;
+        }
+	if ($info['voiced'] !== NULL) {
+                $stats['summary']['voiced']++;
         }
     }
     uasort($stats['langstats'], 'langsort');
