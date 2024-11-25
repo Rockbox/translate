@@ -168,7 +168,7 @@ function get_stats() {
                 $stats['summary']['bad']++;
                 break;
         }
-	if ($info['voiced'] !== NULL) {
+	if (array_key_exists('voiced'), $info) {
                 $stats['summary']['voiced']++;
         }
     }
