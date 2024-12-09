@@ -72,9 +72,9 @@ coverage of the included translations. The darker the square, the better
 coverage. A <span style="color: green">green</span> square indicates full
 coverage.  Hover over the square to see a list of missing glyphs.</p>
 
-<p>Please note that, especially for the CJK language families, 100%
-coverage of our translatable strings does not necessarily mean full
-coverage for arbitrary text in that (or any other) language.</p>
+<p>Please note that 100% coverage of our translatable strings does not
+necessarily mean full coverage for arbitrary text in that (or any other)
+language. This is especially true for the CJK language families.</p>
 
 <p>If you wish to contribute a new font, see <a href="https://www.rockbox.org/wiki/CreateFonts">this page</a> on the wiki.</p>
 
