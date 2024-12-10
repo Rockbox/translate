@@ -85,6 +85,7 @@ language. This is especially true for the CJK language families.</p>
 
 $fontstats = parse_ini_file('scratch/fontcoverage.ini', true);
 $langs = languageinfo();
+$lang_stats = get_stats();
 
 /* Output the first row - font names */
 if (isset($fontstats['english'])) {
@@ -98,7 +99,7 @@ foreach($fontstats as $lang => $stats) {
     if (substr($lang, 0, 7) === 'missing') {
         continue;
     }
-    printf("  <tr>\n    <td class='lang'><img src='flags/%d/%s.png' /> %s</td>\n",SMALL_FLAGSIZE, urlencode($langs[$lang]['flag']), $langs[$lang]['name']);
+    printf("  <tr>\n   <td class='lang' title='%.2f%% complete'><img src='flags/%d/%s.png' /> %s</td>\n", $lang_stats['langstats'][$lang]['percentage'], SMALL_FLAGSIZE, urlencode($langs[$lang]['flag']), $langs[$lang]['name']);
     foreach($stats as $font => $coverage) {
         $hover = "";
         if (isset($fontstats["missing|$lang"]) && isset($fontstats["missing|$lang"][$font])) {
