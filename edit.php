@@ -44,7 +44,13 @@ tracker</a>.
 <li>Rules are stricter for 'voice' entries, as they are intended to be *spoken*. </li>
 <li>Voice strings cannot include C format specifiers (eg '%d') and other suspicious characters such as quotation marks or ellipses.</li>
 <li>There is a set of corrections automatically applied to voice strings; for example spelling out common acronyms or fixing mispronciations in a TTS engine.  See <a href="https://git.rockbox.org/cgit/rockbox.git/tree/tools/voice-corrections.txt">voice-corrections.txt</a> for specifics.</li>
+END;
 
+if ($all == false) {
+  print("<li>This view only shows the strings that are known to be potentially problematic.  To see a complete listing, click <a href=\"edit.php?lang=$lang&all=true\">here</a>.</li>\n");
+}
+
+echo <<<END
 </ul>
 <form action="submit.php" method="post">
 <input type="hidden" name="lang" value="$lang" />
