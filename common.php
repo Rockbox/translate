@@ -169,7 +169,7 @@ function get_stats() {
                 $stats['summary']['bad']++;
                 break;
         }
-	if (array_key_exists('voiced', $info)) {
+	if (array_key_exists('voiced', $info) && $name != 'english') {
                 $stats['summary']['voiced']++;
         }
     }
