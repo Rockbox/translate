@@ -53,7 +53,7 @@ function genstats() {
         list($lastrev, $lastupdate) = getlastupdated($lang);
             $stat = array('name' => $lang, 'total' => 0, 'error' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'dest' => 0, 'destdup' => 0, 'voice' => 0, 'voicedup' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {
-            if (preg_match('/### The phrase '.*' is missing entirely/', $line)) {
+            if (preg_match("/### The phrase '.*' is missing entirely/", $line)) {
                     $stat['missing']++;
                     $err++;
             } elseif (preg_match("/### The <source> section for '.*' is missing/", $line) ||

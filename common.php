@@ -99,10 +99,10 @@ function parselangfile($filename, $all = false) {
             }
         }
         if (preg_match("/^#### (.*)$/", $line, $matches)) {
-            $thisphrase['notes'][] = $matches[1];
+            $thisphrase['notes'][] = "* $matches[1]";
         }
         if (preg_match("/^##### (.*)$/", $line, $matches)) {
-            $thisphrase['notes'][] = $matches[1];
+            $thisphrase['notes'][] = "** $matches[1]";
         }
         elseif (preg_match("/^ *#/", $line, $matches)) {
             continue;
