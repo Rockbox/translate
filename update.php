@@ -56,7 +56,7 @@ function genstats() {
             if (preg_match("/### The phrase '.*' is missing entirely/", $line)) {
                     $stat['missing']++;
                     $err++;
-            } elseif (preg_match("/### The <source> section for '.*' is missing/", $line) ||
+            } elseif (/*preg_match("/### The <source> section for '.*' is missing/", $line) || */
                       preg_match("/### The <source> section for '.*' differs/", $line)) {
                     $stat['source']++;
                     $err++;
