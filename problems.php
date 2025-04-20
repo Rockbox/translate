@@ -54,15 +54,90 @@ MOO;
 $cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang $langfile -", PERL);
 $output = shell_exec($cmd);
 
-print "<ul>\n";
+$missing = array();
+$missing_sub = array();
+$source = array();
+$other = array();
+$desc = array();
+$identical = array();
+
 foreach(explode("\n", $output) as $line) {
   $line = trim($line);
   if (preg_match("/^### (.*)$/", $line, $matches)) {
-    $line = htmlentities($matches[1]);
-    print "<li>$line</li>\n";
+    if (preg_match("/^The phrase '(.*)' is missing entirely/", $matches[1], $phrase)) {
+      $missing[] = $phrase[1];
+    } elseif (preg_match("/^The 'desc' field for '(.*)'/", $matches[1], $phrase)) {
+      $desc[] = $phrase[1];
+    } elseif (preg_match("/^The <source> section for '(.*)' differs from/", $matches[1], $phrase)) {
+      $source[] = $phrase[1];
+    } elseif (preg_match("/^The <(.*)> section for '(.*)' is identical/", $matches[1], $phrase)) {
+      $identical[] = "$phrase[2] ($phrase[1])";
+    } elseif (preg_match("/^The <(.*)> section for '(.*)' is missing/", $matches[1], $phrase)) {
+      if ($phrase[1] == 'source') { continue; }
+      $missing_sub[] = "$phrase[2] ($phrase[1])";
+    } elseif (preg_match("/^The <(.*)> section for '(.*)' is blank/", $matches[1], $phrase)) {
+      $missing_sub[] = "$phrase[2] ($phrase[1])";
+    } else {
+      $other[] = htmlentities($matches[1]);
+    }
   }
 }
-print "</ul>\n";
+
+if (count($missing)) {
+  print "<h3>Phrases missing entirely:</h3>\n";
+  print "<ul>\n";
+  foreach ($missing as $line) {
+    print "<li>$line</li>\n";
+  }
+  print "</ul>\n";
+}
+
+if (count($missing_sub)) {
+  print "<h3>Sub-phrases missing:</h3>\n";
+  print "<ul>\n";
+  foreach ($missing_sub as $line) {
+    print "<li>$line</li>\n";
+  }
+  print "</ul>\n";
+}
+
+if (count($desc)) {
+  print "<h3>Phrases with a changed description:</h3>\n";
+  print "<ul>\n";
+  foreach ($desc as $line) {
+    print "<li>$line</li>\n";
+  }
+  print "</ul>\n";
+}
+
+if (count($source)) {
+  print "<h3>Phrases with a changed source:</h3>\n";
+  print "<ul>\n";
+  foreach ($source as $line) {
+    print "<li>$line</li>\n";
+  }
+  print "</ul>\n";
+}
+
+if (count($identical)) {
+  print "<h3>Translated strings that are the same as English:</h3>\n";
+  print "<ul>\n";
+  foreach ($identical as $line) {
+    print "<li>$line</li>\n";
+  }
+  print "</ul>\n";
+}
+
+if (count($other)) {
+  print "<h3>Other problems:</h3>\n";
+  print "<ul>\n";
+  foreach ($other as $line) {
+    print "<li>$line</li>\n";
+ }
+ print "</ul>\n";
+}
+
+
 
 print "<h2>Other actions</h2>\n";
 if (!isset($_REQUEST['upload'])) {
