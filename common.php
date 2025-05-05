@@ -165,7 +165,7 @@ function get_stats() {
                    && $info['voice'] == 0:
                 $stats['summary']['complete']++;
                 break;
-            case $info['percentage'] > 90;
+            case $info['percentage'] > 85;
                 $stats['summary']['good']++;
                 break;
             case $info['percentage'] > 50;
