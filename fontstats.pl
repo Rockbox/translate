@@ -129,7 +129,7 @@ foreach my $lang (sort(@langs)) {
     foreach my $font (sort(@fonts)) {
         $font =~/(.*).bdf/;
 	my $str = "";
-	foreach my $missing (keys(%{$missing{$font}{$lang}})) {
+	foreach my $missing (sort(keys(%{$missing{$font}{$lang}}))) {
 	    $str .= "u+".ord($missing)."[$missing] ";
 	}
 	print "  $1 = $str\n" if ($str);
