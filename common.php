@@ -24,7 +24,7 @@ define("VERSIONS", 'scratch/versions.dat');
 define("SMALL_FLAGSIZE", '22');
 define("LARGE_FLAGSIZE", '150');
 //define("SMARTY_PATH", '/usr/share/php/Smarty');
-define("SMARTY_PATH", '/home/rockbox/themes/smarty-4.5.4/libs');
+define("SMARTY_PATH", '/home/rockbox/themes/smarty-4.5.6/libs');
 define("LANGUAGES", 'languages.ini');
 define("MAINTAINERS", 'maintainers.ini');
 define("OUTBOUND_EMAIL", 'rockbox-translations-noreply@rockbox.org');

@@ -38,6 +38,7 @@ class templater {
 //        $s->secure_dir = realpath($s->template_dir);
 //        $s->register_modifier('simple_timesince', array(&$this, 'simple_timesince'));
 	$s->registerPlugin("modifier","simple_timesince", array(&$this, "simple_timesince"));
+        $s->muteUndefinedOrNullWarnings();
         $this->s = $s;
     }
 
