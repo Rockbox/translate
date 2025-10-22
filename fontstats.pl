@@ -20,6 +20,7 @@
 
 use strict;
 use feature 'unicode_strings';
+use Unicode::Normalize;
 binmode(STDOUT, ":utf8");
 
 my @langs;
@@ -57,10 +58,19 @@ sub langcoverage($) {
 	    if (/\s*\S*\s*:\s*"(\S*)"\s*/u) {
 		next if ($1 eq "none");
 		foreach my $char (split(//, $1)) {
+# XXX do we necessarily always want to both decomp and not?
+# Revisit this after we get utf8proc into the core?
 		    if (!defined($langchars{$lang}{$char})) {
 			$langchars{$lang}{$char} = 0;
 		    }
 		    $langchars{$lang}{$char}++;
+		    my $decomp = NFD($char);
+		    foreach my $d (split(//, $decomp)) {
+			if (!defined($langchars{$lang}{$d})) {
+			    $langchars{$lang}{$d} = 0;
+			}
+			$langchars{$lang}{$d}++;
+		    }
 		}
 	    }
 	}
