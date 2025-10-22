@@ -21,6 +21,7 @@
 use strict;
 use feature 'unicode_strings';
 use Unicode::Normalize;
+use Unicode::UCD 'charprop';
 binmode(STDOUT, ":utf8");
 
 my @langs;
@@ -139,8 +140,11 @@ foreach my $lang (sort(@langs)) {
     foreach my $font (sort(@fonts)) {
         $font =~/(.*).bdf/;
 	my $str = "";
-	foreach my $missing (sort(keys(%{$missing{$font}{$lang}}))) {
-	    $str .= "u+".ord($missing)."[$missing] ";
+	foreach my $miss (sort(keys(%{$missing{$font}{$lang}}))) {
+            my $prop = charprop(ord($miss), "combining");
+            my $miss2 = $miss;
+            $miss2 = " $miss" if (defined($prop));
+	    $str .= "u+".ord($miss)."[$miss2] ";
 	}
 	print "  $1 = $str\n" if ($str);
     }
