@@ -65,13 +65,13 @@ sub langcoverage($) {
 			$langchars{$lang}{$char} = 0;
 		    }
 		    $langchars{$lang}{$char}++;
-		    my $decomp = NFD($char);
-		    foreach my $d (split(//, $decomp)) {
-			if (!defined($langchars{$lang}{$d})) {
-			    $langchars{$lang}{$d} = 0;
-			}
-			$langchars{$lang}{$d}++;
-		    }
+#		    my $decomp = NFD($char);
+#		    foreach my $d (split(//, $decomp)) {
+#			if (!defined($langchars{$lang}{$d})) {
+#			    $langchars{$lang}{$d} = 0;
+#			}
+#			$langchars{$lang}{$d}++;
+#		    }
 		}
 	    }
 	}
