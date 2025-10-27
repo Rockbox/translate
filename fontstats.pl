@@ -144,7 +144,7 @@ foreach my $lang (sort(@langs)) {
             my $prop = charinfo(ord($miss));
             my $miss2 = $miss;
             $miss2 = "\x{00a0}$miss " if ($$prop{"combining"});
-	    $str .= "u+".ord($miss)."[$miss2] ";
+	    $str .= "U+".sprintf("%04X", ord($miss))."[$miss2] ";
 	}
 	print "  $1 = $str\n" if ($str);
     }
