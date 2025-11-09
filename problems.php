@@ -31,6 +31,8 @@ if (isset($_REQUEST['upload']) && is_uploaded_file($_FILES['langfile']['tmp_name
     $langfile = sprintf('rockbox/apps/lang/%s.lang', $lang);
 }
 
+$langfile = escapeshellarg($langfile);
+
 if ($lang == 'english') {
 echo <<<MOO
 <img class="flag" src="flags/150/{$languageinfo[$lang]['flag']}.png" />
@@ -51,7 +53,7 @@ This doesn't offer a way to fix this automatically, so you'll have to edit
 the language file yourself.</p>
 MOO;
 
-$cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang '$langfile' -", PERL);
+$cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang $langfile -", PERL);
 $output = shell_exec($cmd);
 
 $missing = array();
