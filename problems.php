@@ -51,7 +51,7 @@ This doesn't offer a way to fix this automatically, so you'll have to edit
 the language file yourself.</p>
 MOO;
 
-$cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang $langfile -", PERL);
+$cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang '$langfile' -", PERL);
 $output = shell_exec($cmd);
 
 $missing = array();
