@@ -27,7 +27,7 @@ if (isset($_REQUEST['upload']) && is_uploaded_file($_FILES['langfile']['tmp_name
     $lang = 'upload';
     $langfile = $_FILES['langfile']['tmp_name'];
 } else {
-    $lang = isset($_GET['lang']) ? $_GET['lang'] : '';
+    $lang = isset($_GET['lang']) ? preg_replace('/[^a-z-]/', '', $_GET['lang']) : '';
     $langfile = sprintf('rockbox/apps/lang/%s.lang', $lang);
 }
 
