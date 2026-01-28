@@ -67,14 +67,21 @@ th {
 
 <h1>Language coverage of fonts</h1>
 
-<p>This page lists fonts included with Rockbox and attemps to visualise their
-coverage of the included translations. The darker the square, the better
-coverage. A <span style="color: green">green</span> square indicates full
-coverage.  Hover over the square to see a list of missing glyphs.</p>
+<p>This page attempts to visualize the language coverage of the fonts
+<b>included in the
+<a href="https://download.rockbox.org/daily/fonts/rockbox-fonts.zip">Rockbox Font Pack</a></b>
+by checking them against the codepoints used by our various translations.
+The darker the square, the better coverage. A
+<span style="color: green">green</span> square indicates full
+coverage.  Hover over the square to see a list of missing codepoints.</p>
 
 <p>Please note that 100% coverage of our translatable strings does not
 necessarily mean full coverage for arbitrary text in that (or any other)
 language. This is especially true for the CJK language families.</p>
+
+<p>Also note that individual themes often include their own embedded fonts
+with varying degrees of language coverage; those are not (nor can they be)
+visualized here.</p>
 
 <p>If you wish to contribute a new font, see <a href="https://www.rockbox.org/wiki/CreateFonts">this page</a> on the wiki.</p>
 
