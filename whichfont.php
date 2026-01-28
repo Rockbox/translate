@@ -68,8 +68,8 @@ th {
 <h1>Language coverage of fonts</h1>
 
 <p>This page attempts to visualize the language coverage of the fonts
-<b>included in the
-<a href="https://download.rockbox.org/daily/fonts/rockbox-fonts.zip">Rockbox Font Pack</a></b>
+included in the
+<a href="https://download.rockbox.org/daily/fonts/rockbox-fonts.zip">Rockbox Font Pack</a>
 by checking them against the codepoints used by our various translations.
 The darker the square, the better coverage. A
 <span style="color: green">green</span> square indicates full
