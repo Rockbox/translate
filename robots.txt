@@ -1,21 +1,4 @@
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: BLEXBot
-Disallow: /
-
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: dotbot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
 User-agent: *
-Allow: index.php
-Disallow: /
 Disallow: /graph.php
 Disallow: /edit.php
 Disallow: /problems.php
