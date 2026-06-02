@@ -1,4 +1,4 @@
-{include file="header.tpl" title=$title rss="rss.php"}
+{include file='header.tpl' title=$title rss='rss.php'}
 
 <h1>Rockbox translations</h1>
 
@@ -21,9 +21,9 @@ possibly slightly safer way.
 <ul>
 {foreach from=$summary key=k item=v}
     <li>{$v} {$k} translation{if $v!=1}s{/if}
-    {if $k=="good"}(&gt;85% translated){/if}
-    {if $k=="normal"}(&gt;50% translated){/if}
-    {if $k=="bad"}(&lt;50% translated){/if}
+    {if $k=='good'}(&gt;85% translated){/if}
+    {if $k=='normal'}(&gt;50% translated){/if}
+    {if $k=='bad'}(&lt;50% translated){/if}
     </li>
 {/foreach}
 </ul>
@@ -32,7 +32,7 @@ possibly slightly safer way.
 <table>
     <thead>
     <tr>
-        <td colspan='3'>Language</td>
+        <td colspan="3">Language</td>
         <td>Voiced</td>
         <td>Last update</td>
         <td>Progress</td>
@@ -73,7 +73,7 @@ possibly slightly safer way.
         {if $language.percentage == 100 && $language.desc == 0 && $language.source == 0 && $language.dest == 0 && $language.voice == 0 && ($language.voicedup + $language.destdup) == 0 }
             {$language.name}
         {else}
-            <a href='edit.php?lang={$langfile}'>{$language.name}</a>
+            <a href="edit.php?lang={$langfile}">{$language.name}</a>
         {/if}
         </td>
         <td>
@@ -82,13 +82,13 @@ possibly slightly safer way.
         {/if}
         </td>
         <td>
-            <a href='//git.rockbox.org/cgit/rockbox.git/commit/?id={$language.last_update_rev}' title='{$language.last_update|date_format:"%c"}'>
+            <a href="//git.rockbox.org/cgit/rockbox.git/commit/?id={$language.last_update_rev}" title="{$language.last_update|date_format:'%c'}">
                 {$language.last_update|simple_timesince}
             </a>
         </td>
         <td>
-            <div class="progress-wrapper" title="{$language.percentage|string_format:"%.2f"}%">
-                <div class="progress-completed" style="width: {$language.percentage|string_format:"%.2f"}%"></div>
+            <div class="progress-wrapper" title="{$language.percentage|string_format:'%.2f'}%">
+                <div class="progress-completed" style="width: {$language.percentage|string_format:'%.2f'}%"></div>
             </div>
         </td>
         </td>
@@ -102,4 +102,4 @@ possibly slightly safer way.
     {/foreach}
 </table>
 
-{include file="footer.tpl"}
+{include file='footer.tpl'}

@@ -91,10 +91,10 @@ function parselangfile($filename, $all = false) {
         $line = trim($line);
 
 	if ($all == true) {
-            $thisphrase['notes'][0] = "All fields are editable";
+            $thisphrase['notes'][0] = 'All fields are editable';
         }
         if (preg_match("/^### (.*)$/", $line, $matches)) {
-            if (strpos($matches[1], "The phrase is not used. Skipped") === false) {
+            if (strpos($matches[1], 'The phrase is not used. Skipped') === false) {
                 $thisphrase['notes'][] = $matches[1];
             }
         }

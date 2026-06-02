@@ -18,10 +18,10 @@
  *
  **************************************************************************/
 
-header("Content-type: text/html; charset=UTF-8");
+header('Content-type: text/html; charset=UTF-8');
 require_once('common.php');
 /* Set internal character encoding to UTF-8 */
-mb_internal_encoding("UTF-8");
+mb_internal_encoding('UTF-8');
 ?>
 <!DOCTYPE html>
 <html>
@@ -108,7 +108,7 @@ foreach($fontstats as $lang => $stats) {
     }
     printf("  <tr>\n   <td class='lang' title='%.2f%% complete'><img src='flags/%d/%s.png' /> %s</td>\n", $lang_stats['langstats'][$lang]['percentage'], SMALL_FLAGSIZE, urlencode($langs[$lang]['flag']), $langs[$lang]['name']);
     foreach($stats as $font => $coverage) {
-        $hover = "";
+        $hover = '';
         if (isset($fontstats["missing|$lang"]) && isset($fontstats["missing|$lang"][$font])) {
             $hover = $fontstats["missing|$lang"][$font];
         }

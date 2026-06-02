@@ -56,10 +56,10 @@ echo <<<END
 <input type="hidden" name="lang" value="$lang" />
 END;
 
-    $phrases = parselangfile(sprintf("scratch/%s.lang.update", $lang), $all);
-    $english = parselangfile(sprintf("scratch/%s.lang.update", 'english'), $all);
+    $phrases = parselangfile(sprintf('scratch/%s.lang.update', $lang), $all);
+    $english = parselangfile(sprintf('scratch/%s.lang.update', 'english'), $all);
     if ($phrases === false || $english === false) {
-        printf("<strong>The file %s.lang doesn't exist, or something else went terribly wrong</strong>", $lang);
+        printf('<strong>The file %s.lang doesn't exist, or something else went terribly wrong</strong>', $lang);
         return false;
     }
 
@@ -67,8 +67,8 @@ END;
     $inputdir = isset($languageinfo[$lang]['rtl']) && $languageinfo[$lang]['rtl'] === true ? " dir='rtl' " : '';
     foreach($phrases as $id => $phrase) {
         $foo = array();
-        if (sizeof($phrase['notes']) > 0 && trim(strtolower($phrase['phrase']['desc'])) != "deprecated") {
-            printf("<h3>%s</h3>", $phrase['phrase']['id']);
+        if (sizeof($phrase['notes']) > 0 && trim(strtolower($phrase['phrase']['desc'])) != 'deprecated') {
+            printf('<h3>%s</h3>', $phrase['phrase']['id']);
 
             if (isset($phrase['phrase']['desc']))
                 printf("Description: %s<br />\n", $phrase['phrase']['desc']);
@@ -76,7 +76,7 @@ END;
                 printf("User: %s<br />\n", $phrase['phrase']['user']);
 
             if (sizeof($phrase['notes']) > 0) {
-                print("<div class='note'>");
+                print('<div class="note">');
                 foreach($phrase['notes'] as $line) {
 		    if (preg_match('/The <(.+)> section for \'.+:(.*)\'.+/', $line, $matches)) {
 	                $foo["$matches[1]:$matches[2]"] = 1;
@@ -86,10 +86,10 @@ END;
 	            }
                     printf("%s<br />\n", htmlspecialchars($line));
                 }
-                print("</div>");
+                print('</div>');
             }
 
-            printf("<table><thead><tr><td>Target/feature</td><td>English string</td><td>%s translation</td><td>English voice</td><td>%s voice</td></tr></thead>", $languageinfo[$lang]['name'], $languageinfo[$lang]['name']);
+            printf('<table><thead><tr><td>Target/feature</td><td>English string</td><td>%s translation</td><td>English voice</td><td>%s voice</td></tr></thead>', $languageinfo[$lang]['name'], $languageinfo[$lang]['name']);
             foreach($phrase['source'] as $target => $string) {
                 // Figure out what to put in the translated string
                 if (isset($english[$id]['dest'][$target]) && ($english[$id]['dest'][$target] == '' || $english[$id]['dest'][$target] == 'none')) {
@@ -143,15 +143,15 @@ END;
                     $voice_readonly = '';
                 }
 
-                print("<tr>");
+                print('<tr>');
 		if (array_key_exists("dest:$target", $foo) ||
-		    array_key_exists("dest", $foo)) {
+		    array_key_exists('dest', $foo)) {
 			$bgcolor='class="poor"';
                 } else {
 			$bgcolor='';
 		}
 
-                printf("<td>%s</td><td>%s</td><td $bgcolor><input %s %s name='phrases[%s][dest][%s]' size='40' type='text' value='%s' %s /></td>",
+                printf('<td>%s</td><td>%s</td><td $bgcolor><input %s %s name="phrases[%s][dest][%s]" size="40" type="text" value="%s" %s /></td>',
                     htmlspecialchars($target),
                     htmlspecialchars($string),
                     $inputlang,
@@ -163,18 +163,18 @@ END;
                 );
 
 		if (array_key_exists("voice:$target", $foo) ||
-		    array_key_exists("voice", $foo)) {
-			$bgcolor='class="poor"';
+		    array_key_exists('voice', $foo)) {
+			$bgcolor='class='poor'';
                 } else {
 			$bgcolor='';
 		}
 
 
                 if (!isset($english[$id]['voice'][$target])) {
-                    print("<td colspan='2'></td>");
+                    print('<td colspan="2"></td>');
                 }
                 else {
-                    printf("<td>%s</td><td $bgcolor><input %s %s name='phrases[%s][voice][%s]' size='40' type='text' value='%s' %s /></td>",
+                    printf('<td>%s</td><td $bgcolor><input %s %s name="phrases[%s][voice][%s]" size="40" type="text" value="%s" %s /></td>',
                         htmlspecialchars(isset($english[$id]['voice'][$target]) ? $english[$id]['voice'][$target] : ''),
                         $inputlang,
                         $inputdir,
@@ -186,10 +186,10 @@ END;
                 }
                 print("</tr>\n");
             }
-            print("</table>");
+            print('</table>');
         }
-        elseif (trim(strtolower($phrase['phrase']['desc'])) == "deprecated") {
-            printf("<input type='hidden' name='phrases[%s][dest][*]' value='' /><input type='hidden' name='phrases[%s][dest][*]' value='' />",
+        elseif (trim(strtolower($phrase['phrase']['desc'])) == 'deprecated') {
+            printf('<input type="hidden" name="phrases[%s][dest][*]" value="" /><input type="hidden" name="phrases[%s][dest][*]" value="" />',
                 htmlspecialchars($id),
                 htmlspecialchars($id)
             );

@@ -26,7 +26,7 @@ function update_langs() {
     $fp = fopen(VERSIONS, 'w');
     foreach(glob('rockbox/apps/lang/*.lang') as $lang) {
         $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H -1 %s",
-                "apps/lang/" . basename($lang)));
+                'apps/lang/' . basename($lang)));
         $line = sprintf("%s:%s\n", basename($lang, '.lang'), trim($gitstr));
         fwrite($fp, $line);
     }
@@ -37,7 +37,7 @@ function update_langs() {
 function genstats() {
     $langs = array();
     foreach(file(VERSIONS) as $line) {
-        list($lang, $version) = explode(":", trim($line));
+        list($lang, $version) = explode(':', trim($line));
         $langs[$lang] = $version;
     }
 
@@ -45,11 +45,11 @@ function genstats() {
     foreach($langs as $lang => $rev) {
         $foo = array();
         $err = 0;
-        $cmd = sprintf("%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang -", PERL, $lang);
+        $cmd = sprintf('%s -s rockbox/tools/updatelang rockbox/apps/lang/english.lang rockbox/apps/lang/%s.lang -', PERL, $lang);
         $output = shell_exec($cmd);
 //        print("$ $cmd\n");
 //        printf("%s\n", $output);
-        file_put_contents(sprintf("scratch/%s.lang.update", $lang), $output);
+        file_put_contents(sprintf('scratch/%s.lang.update', $lang), $output);
         list($lastrev, $lastupdate) = getlastupdated($lang);
             $stat = array('name' => $lang, 'total' => 0, 'error' => 0, 'missing' => 0, 'desc' => 0, 'source' => 0, 'dest' => 0, 'destdup' => 0, 'voice' => 0, 'voicedup' => 0, 'last_update' => $lastupdate, 'last_update_rev' => $lastrev);
         foreach(explode("\n", $output) as $line) {
@@ -119,7 +119,7 @@ function genstats() {
 //            $info['percentage']--; // XXX for testing only.
 	    foreach($maintainers[$lang] as $id => $email) {
               if ($info['percentage'] < $oldinfo['percentage']) {
-	        $headers = sprintf("From: %s", OUTBOUND_EMAIL);
+	        $headers = sprintf('From: %s', OUTBOUND_EMAIL);
 		$subject = sprintf("Rockbox '%s' translation needs updating\n", $lang);
 		$msg = sprintf("
 
@@ -157,19 +157,19 @@ function getlastupdated($lang) {
     $retries = 0;
     while ($retries < 5) {
         try {
-            $gitstr = shell_exec(sprintf("cd rockbox && git log --pretty=%%H,%%ct -200 apps/lang/%s.lang", $lang));
+            $gitstr = shell_exec(sprintf('cd rockbox && git log --pretty=%%H,%%ct -200 apps/lang/%s.lang', $lang));
             $line = sprintf("%s:%s\n", basename($lang, '.lang'), $gitstr);
             $retries = 100;
         }
         catch (Exception $e) {
             $retries++;
             printf("Warning: Caught exception: %s (trying again)<br />\n", $e->getMessage());
-            if ($retries > 5) die("Cannot succeed :(");
+            if ($retries > 5) die('Cannot succeed :(');
         }
     }
     $ignorehash = explode("\n", file_get_contents('ignoredhash.list'));
     foreach(preg_split('(\n\r|\r\n|\r|\n)', $gitstr) as $logentry) {
-        list($rev, $date) = explode(",", trim($logentry));
+        list($rev, $date) = explode(',', trim($logentry));
         if(!in_array($rev, $ignorehash)) {
             return array($rev, $date);
         }
@@ -179,7 +179,7 @@ function getlastupdated($lang) {
 
 function update_flags() {
     $languageinfo = languageinfo();
-    $path = "e/e6";
+    $path = 'e/e6';
 
     if (!file_exists('flags')) {
         mkdir('flags');

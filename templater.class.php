@@ -26,11 +26,11 @@ class templater {
 
     public function __construct($smartydir) {
         /* Load and set up Smarty */
-        require_once(sprintf("%s/Smarty.class.php", $smartydir));
+        require_once(sprintf('%s/Smarty.class.php', $smartydir));
         $s = new smarty();
-        $s->setTemplateDir("templates");
-        $s->setCompileDir("templates/compiled");
-        $s->setCacheDir("templates/cache");
+        $s->setTemplateDir('templates');
+        $s->setCompileDir('templates/compiled');
+        $s->setCacheDir('templates/cache');
 //        $s->caching = false;
 //        $s->debugging = false;
 //        $s->security = true;
@@ -47,34 +47,34 @@ class templater {
         $one_hour = 60*60;
         $one_day = 24*$one_hour;
         if ($seconds > 60*28 && $seconds < 60*32) {
-            return "half an hour ago";
+            return 'half an hour ago';
         }
         elseif ($seconds < $one_hour) {
             $minutes = floor($seconds/60);
-            return sprintf("%d minute%s ago", $minutes, qs($minutes));
+            return sprintf('%d minute%s ago', $minutes, qs($minutes));
         }
         elseif ($seconds < $one_day) {
             $hours = floor($seconds/$one_hour);
-            return sprintf("%d hour%s ago", $hours, qs($hours));
+            return sprintf('%d hour%s ago', $hours, qs($hours));
         }
         elseif ($seconds < 2*$one_day) {
-            return "Yesterday";
+            return 'Yesterday';
         }
         elseif ($seconds < 7*$one_day) {
             $days = floor($seconds/$one_day);
-            return sprintf("%d day%s ago", $days, qs($days));
+            return sprintf('%d day%s ago', $days, qs($days));
         }
         elseif ($seconds < 2*30*$one_day) {
             $weeks = floor($seconds/(7*$one_day));
-            return sprintf("%d week%s ago", $weeks, qs($weeks));
+            return sprintf('%d week%s ago', $weeks, qs($weeks));
         }
         elseif ($seconds < 365*$one_day) {
             $months = floor($seconds/(30*$one_day));
-            return sprintf("%d month%s ago", $months, qs($months));
+            return sprintf('%d month%s ago', $months, qs($months));
         }
         else {
             $years = floor($seconds/(365*$one_day));
-            return sprintf("%d year%s ago", $years, qs($years));
+            return sprintf('%d year%s ago', $years, qs($years));
         }
     }
 
