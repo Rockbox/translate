@@ -83,11 +83,11 @@ function submit() {
     fclose($fp);
 
     if ($_POST['full']) {
-        $cmd = sprintf("/usr/bin/cat %s", $filename);
+        readfile($filename);
     } else {
         $cmd = sprintf("/usr/bin/diff -u -B -w rockbox/apps/lang/%s.lang %s", escapeshellarg($_REQUEST['lang']), $filename);
+        print(shell_exec($cmd));
     }
-    print(shell_exec($cmd));
 }
 
 submit();
