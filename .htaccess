@@ -1,3 +1,6 @@
+<Files "maintainers.ini">
+  Require all denied
+</Files>
 <Files "*.ini">
   ForceType 'text/plain; charset=UTF-8'
 </Files>
