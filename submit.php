@@ -24,39 +24,39 @@ require_once('common.php');
 function submit() {
     $type = $_POST['full'] ? 'lang' : 'diff';
 
-    header("Content-type: text/plain;charset=UTF-8");
-    header(sprintf("Content-Disposition: attachment; filename=%s.%s", $_REQUEST['lang'], $type));
+    header('Content-type: text/plain;charset=UTF-8');
+    header(sprintf('Content-Disposition: attachment; filename=%s.%s', $_REQUEST['lang'], $type));
 
     $langs = array();
     if (file_exists(VERSIONS)) {
         foreach(file(VERSIONS) as $line) {
-            list($lang, $version) = explode(":", trim($line));
+            list($lang, $version) = explode(':', trim($line));
             $langs[$lang] = $version;
         }
     }
 
     $i = 0;
     do {
-        $filename = sprintf("/tmp/%s.lang%s.new", $_REQUEST['lang'], $i == 0 ? '' : '.'.$i);
+        $filename = sprintf('/tmp/%s.lang%s.new', $_REQUEST['lang'], $i == 0 ? '' : '.'.$i);
         $i++;
     } while (file_exists($filename));
 
     $fp = fopen($filename, 'w');
     if ($fp === false) {
-	header("HTTP/1.1 500 Internal Server Error");
+	header('HTTP/1.1 500 Internal Server Error');
 	print "\nUnable to write tmpfile\n";
 	exit(1);
     }
 
     // Write a header if one exists
-    $original_lines = file(sprintf("rockbox/apps/lang/%s.lang", $_REQUEST['lang']));
+    $original_lines = file(sprintf('rockbox/apps/lang/%s.lang', $_REQUEST['lang']));
     foreach($original_lines as $i => $line) {
-        if (substr($line, 0, 1) == "<") { break; }
+        if (substr($line, 0, 1) == '<') { break; }
         fwrite($fp, $line);
     }
 
-    $original = parselangfile(sprintf("scratch/%s.lang.update", $_REQUEST['lang']));
-    $english = parselangfile("scratch/english.lang");
+    $original = parselangfile(sprintf('scratch/%s.lang.update', $_REQUEST['lang']));
+    $english = parselangfile('scratch/english.lang');
 
     if (! $_POST['full']) {
         print("Copyright by individual Rockbox contributors\n");
@@ -75,7 +75,7 @@ function submit() {
                     unset($phrase[$type]);
             }
         }
-        if (strtolower($english[$id]['phrase']['desc']) == "deprecated") {
+        if (strtolower($english[$id]['phrase']['desc']) == 'deprecated') {
             $phrase = $english[$id];
         }
         fwrite($fp, printphrase($phrase));
@@ -85,7 +85,7 @@ function submit() {
     if ($_POST['full']) {
         readfile($filename);
     } else {
-        $cmd = sprintf("/usr/bin/diff -u -B -w rockbox/apps/lang/%s.lang %s", escapeshellarg($_REQUEST['lang']), $filename);
+        $cmd = sprintf('/usr/bin/diff -u -B -w rockbox/apps/lang/%s.lang %s', escapeshellarg($_REQUEST['lang']), $filename);
         print(shell_exec($cmd));
     }
 }
