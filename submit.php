@@ -89,7 +89,9 @@ function submit() {
     if ($_POST['full']) {
         readfile($filename);
     } else {
-        $cmd = sprintf('/usr/bin/diff -u -B -w %s %s', escapeshellarg($langfile), $filename);
+        $langfile_esc = escapeshellarg($langfile);
+        $cmd = sprintf('/usr/bin/diff -u -B -w --label a/%s --label b/%s %s %s',
+            $langfile_esc, $langfile_esc, $langfile_esc, $filename);
         print(shell_exec($cmd));
     }
 }
