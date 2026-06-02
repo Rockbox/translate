@@ -24,7 +24,7 @@ require_once('common.php');
 function submit() {
     $type = $_POST['full'] ? 'lang' : 'diff';
 
-    header('Content-type: text/plain;charset=UTF-8');
+    header('Content-type: text/plain; charset=UTF-8');
     header(sprintf('Content-Disposition: attachment; filename=%s.%s', $_REQUEST['lang'], $type));
 
     $langs = array();
@@ -43,15 +43,19 @@ function submit() {
 
     $fp = fopen($filename, 'w');
     if ($fp === false) {
-	header('HTTP/1.1 500 Internal Server Error');
-	print "\nUnable to write tmpfile\n";
-	exit(1);
+        header('HTTP/1.1 500 Internal Server Error');
+        print "\nUnable to write tmpfile\n";
+        exit(1);
     }
 
+    $langfile = sprintf('rockbox/apps/lang/%s.lang', $_REQUEST['lang']);
+
     // Write a header if one exists
-    $original_lines = file(sprintf('rockbox/apps/lang/%s.lang', $_REQUEST['lang']));
+    $original_lines = file($langfile);
     foreach($original_lines as $i => $line) {
-        if (substr($line, 0, 1) == '<') { break; }
+        if (substr($line, 0, 1) == '<') {
+            break;
+        }
         fwrite($fp, $line);
     }
 
@@ -85,7 +89,7 @@ function submit() {
     if ($_POST['full']) {
         readfile($filename);
     } else {
-        $cmd = sprintf('/usr/bin/diff -u -B -w rockbox/apps/lang/%s.lang %s', escapeshellarg($_REQUEST['lang']), $filename);
+        $cmd = sprintf('/usr/bin/diff -u -B -w %s %s', escapeshellarg($langfile), $filename);
         print(shell_exec($cmd));
     }
 }
