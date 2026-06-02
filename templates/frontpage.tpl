@@ -27,7 +27,7 @@ possibly slightly safer way.
     </li>
 {/foreach}
 </ul>
-<p><i>Note: Languages need at least 85% coverage before we will enable automatic voicefile creation in nightly and release builds</i></p>
+<p><i>Note: Translations need at least 85% coverage before we will enable automatic voicefile creation in nightly and release builds</i></p>
 
 <table>
     <thead>
