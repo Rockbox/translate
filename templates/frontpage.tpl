@@ -86,7 +86,11 @@ possibly slightly safer way.
                 {$language.last_update|simple_timesince}
             </a>
         </td>
-        <td><img title='{$language.percentage|string_format:"%.2f%%"}' src='graph.php?p={$language.percentage|string_format:"%.2f"}' /></td>
+        <td>
+            <div class="progress-wrapper" title="{$language.percentage|string_format:"%.2f"}%">
+                <div class="progress-completed" style="width: {$language.percentage|string_format:"%.2f"}%"></div>
+            </div>
+        </td>
         </td>
         <td>{$language.missing}</td>
         <td>{$language.desc}</td>

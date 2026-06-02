@@ -41,9 +41,16 @@ img.icon {
   border: none;
 }
 
-img.graph {
-    border: medium solid black;
-    margin: 1em 0;
+.progress-wrapper {
+    width: 150px;
+    height: 15px;
+    background-color: #F00;
+    border: 1px solid #000;
+}
+
+.progress-completed {
+    height: 100%;
+    background-color: #0F0;
 }
 
 div#gmap {

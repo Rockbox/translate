@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /graph.php
 Disallow: /edit.php
 Disallow: /problems.php
