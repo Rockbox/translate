@@ -22,4 +22,3 @@ require_once('common.php');
 
 $stats = get_stats();
 $smarty->render('frontpage.tpl', $stats);
-?>

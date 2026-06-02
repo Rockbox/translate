@@ -92,4 +92,3 @@ class templater {
         $this->s->display($pagename);
     }
 }
-?>

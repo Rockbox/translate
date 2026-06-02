@@ -266,4 +266,3 @@ Last updated $date. Flags copyright Wikimedia contributors.
 </html>
 END;
 }
-?>

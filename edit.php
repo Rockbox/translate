@@ -220,4 +220,3 @@ END;
 print_head();
 edit($_REQUEST['lang'], $_REQUEST['all']);
 print_foot();
-?>

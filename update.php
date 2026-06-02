@@ -203,4 +203,3 @@ function update_flags() {
 update_langs();
 genstats();
 update_flags();
-?>

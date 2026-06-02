@@ -160,4 +160,3 @@ MOO;
 }
 
 print_foot();
-?>
