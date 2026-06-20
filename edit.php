@@ -59,7 +59,7 @@ END;
     $phrases = parselangfile(sprintf('scratch/%s.lang.update', $lang), $all);
     $english = parselangfile(sprintf('scratch/%s.lang.update', 'english'), $all);
     if ($phrases === false || $english === false) {
-        printf('<strong>The file %s.lang doesn't exist, or something else went terribly wrong</strong>', $lang);
+        printf('<strong>The file %s.lang does not exist, or something else went terribly wrong</strong>', $lang);
         return false;
     }
 
@@ -164,7 +164,7 @@ END;
 
 		if (array_key_exists("voice:$target", $foo) ||
 		    array_key_exists('voice', $foo)) {
-			$bgcolor='class='poor'';
+			$bgcolor='class="poor"';
                 } else {
 			$bgcolor='';
 		}
