@@ -97,7 +97,7 @@ $lang_stats = get_stats();
 /* Output the first row - font names */
 if (isset($fontstats['english'])) {
     foreach($fontstats['english'] as $font => $coverage) {
-        printf("    <th><span class=\"rotate\">%s</span></th>\n", $font);
+        printf("    <th title=\"%d total glyphs\"><span class=\"rotate\">%s</span></th>\n", $fontstats['chars'][$font], $font);
     }
     print("  </tr>\n");
 }

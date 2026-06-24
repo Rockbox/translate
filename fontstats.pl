@@ -149,3 +149,10 @@ foreach my $lang (sort(@langs)) {
 	print "  $1 = $str\n" if ($str);
     }
 }
+
+# Finally, character counts
+print "\n[chars]\n";
+foreach my $font (sort(@fonts)) {
+	$font =~/(.*).bdf/;
+	printf "$1 = %d\n", scalar(keys(%{$fontchars{$font}}));
+}
