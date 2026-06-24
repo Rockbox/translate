@@ -103,7 +103,8 @@ if (isset($fontstats['english'])) {
 }
 
 foreach($fontstats as $lang => $stats) {
-    if (substr($lang, 0, 7) === 'missing') {
+    if (substr($lang, 0, 7) === 'missing' ||
+        substr($lang, 0, 5) === 'chars') {
         continue;
     }
     printf("  <tr>\n   <td class='lang' title='%.2f%% complete'><img src='flags/%d/%s.png' /> %s</td>\n", $lang_stats['langstats'][$lang]['percentage'], SMALL_FLAGSIZE, urlencode($langs[$lang]['flag']), $langs[$lang]['name']);
