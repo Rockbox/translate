@@ -136,12 +136,15 @@ Current translation status as of %s:
   voice issues:        %s
   same as english:     %s
 
-Please submit an update at your convenience!
+Please submit an update at your convenience:
+
+  https://www.rockbox.org/translate/edit.php?lang=%s
 
 ",
                  $lang, substr($stats['langstats']['english']['last_update_rev'], 0, 10),
 		 $info['percentage'], $info['missing'], $info['source'],
-                 $info['desc'], $info['dest'], $info['voice'], $info['destdup'] + $info['voicedup']);
+                 $info['desc'], $info['dest'], $info['voice'], $info['destdup'] + $info['voicedup'],
+                 $lang);
 
 		mail($email, $subject, $msg, $headers);
             }
