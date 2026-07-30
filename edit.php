@@ -37,7 +37,7 @@ tracker</a>.
 </p>
 <p>Other notes:</p>
 <ul>
-<li><b>We will need your full legal name in order to accept any patches, including translation updates!</b></li>
+<li><b>We will need your <a href="https://www.rockbox.org/wiki/WhyRealNames">full legal name</a> in order to accept any patches, including translation updates!</b></li>
 <li>If a field is read-only, it means that this string is not meant to be translated and will not be editable.</li>
 <li>The special string "none" is not meant to be translated, and will not allow edits.</li>
 <li>Normally, if a translated string is the same as the original English, this is treated as an error. To bypass this test for specific strings, please prepend them with '~'. (For example, instead of 'something' you would write '~something')</li>
