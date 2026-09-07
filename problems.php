@@ -151,7 +151,7 @@ if (true || $_SERVER['REMOTE_ADDR'] == trim(file_get_contents($_SERVER['DOCUMENT
     <h2>Check your work in progress</h2>
     <p>Using the form below, you can upload a work in progress and generate a report
     similar to this one, for your language.</p>
-    <form enctype="multipart/form-data" action="problems2.php" method="post">
+    <form enctype="multipart/form-data" action="problems.php" method="post">
     <input type="hidden" name="upload" value="true" />
     <input type="file" name="langfile" />
     <input type="submit" value="send" />
