@@ -56,7 +56,7 @@ sub langcoverage($) {
 	} elsif (/^\s*<\/dest>\s*$/) {
 	    $indest = 0;
 	} elsif ($indest) {
-	    if (/\s*\S*\s*:\s*"(\S*)"\s*/u) {
+	    if (/\s*\S*\s*:\s*"~?(\S*)"\s*/u) {
 		next if ($1 eq "none");
 		foreach my $char (split(//, $1)) {
 # XXX do we necessarily always want to both decomp and not?
