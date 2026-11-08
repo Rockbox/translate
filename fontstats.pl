@@ -146,7 +146,7 @@ foreach my $lang (sort(@langs)) {
             $miss2 = "\x{00a0}$miss " if ($$prop{"combining"});
 	    $str .= "U+".sprintf("%04X", ord($miss))."[$miss2] ";
 	}
-	print "  $1 = $str\n" if ($str);
+	print "  $1 = \"$str\"\n" if ($str);
     }
 }
 
